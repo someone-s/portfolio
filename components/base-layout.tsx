@@ -9,16 +9,18 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
+import basePath from "./base-path"
 import { ModeToggle } from "./mode-toggle";
+import Link from "next/link";
 
 function HomePopup() {
 	return (
 		<ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
-					<a className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/images/scotland.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
-						href="/home"
+					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
+													bg-[url(/portfolio/images/scotland.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
+						href="/"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
 							About Myself
@@ -26,16 +28,16 @@ function HomePopup() {
 						<p className="text-white text-sm leading-tight text-shadow-lg">
 							CompSci Graduate
 						</p>
-					</a>
+					</Link>
 				</NavigationMenuLink>
 			</li>
-			<ListItem href="/home/#experience" title="Experience">
+			<ListItem href="/#experience" title="Experience">
 				Experienced graduate developer
 			</ListItem>
-			<ListItem href="/home/#interests" title="Interests">
+			<ListItem href="/#interests" title="Interests">
 				Keen volunteer and traveller
 			</ListItem>
-			<ListItem href="/home/#contacts" title="Contact Details">
+			<ListItem href="/#contacts" title="Contact Details">
 				Contact me on various platforms
 			</ListItem>
 		</ul>
@@ -47,8 +49,8 @@ function ProjectsPopup() {
 		<ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
-					<a className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/images/barcelona.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
+					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
+													bg-[url(/portfolio/images/barcelona.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
 						href="/projects"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
@@ -57,7 +59,7 @@ function ProjectsPopup() {
 						<p className="text-white text-sm leading-tight text-shadow-lg">
 							A wide selection
 						</p>
-					</a>
+					</Link>
 				</NavigationMenuLink>
 			</li>
 			<ListItem href="/projects/frontend" title="Frontend Development">
@@ -78,8 +80,8 @@ function BlogsPopup() {
 		<ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
-					<a className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/images/london.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
+					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
+													bg-[url(/portfolio/images/london.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
 						href="/blogs"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
@@ -88,16 +90,16 @@ function BlogsPopup() {
 						<p className="text-white text-sm leading-tight text-shadow-lg">
 							It's not that interesting
 						</p>
-					</a>
+					</Link>
 				</NavigationMenuLink>
 			</li>
-			<ListItem href="/blogs/#featured" title="Featured Blogs">
+			<ListItem href="/blogs#featured" title="Featured Blogs">
 				A few blogs I am particularly proud of
 			</ListItem>
-			<ListItem href="/blogs/#all" title="Blog Glossary">
+			<ListItem href="/blogs#all" title="Blog Glossary">
 				All the blogs I have ever written
 			</ListItem>
-			<ListItem href="/blogs/#medium" title="Medium Links">
+			<ListItem href="/blogs#medium" title="Medium Links">
 				Find my blogs directly on medium
 			</ListItem>
 		</ul>
