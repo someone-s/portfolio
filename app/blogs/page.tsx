@@ -6,7 +6,7 @@ import BaseLayout from "@/components/base-layout";
 export default function Home() {
   return (
     <BaseLayout>
-      <AnimatedLanding id="landing" image="/portfolio/images/loch.jpg" phrase="Blogs"></AnimatedLanding>
+      <AnimatedLanding id="landing" image="/portfolio/images/loch.jpg" phrase="Random Ramblings"></AnimatedLanding>
       <AnimatedPanel id="featured">
         <div className="bg-red-300 size-5"></div>
       </AnimatedPanel>

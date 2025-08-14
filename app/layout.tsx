@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Dela_Gothic_One, Geist, Geist_Mono } from "next/font/google";
+import { Bitcount_Grid_Double, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const delaGothicOne = Dela_Gothic_One({
+const bitCountGridDouble = Bitcount_Grid_Double({
   weight: "400",
-  variable: "--font-dela-gothic-one",
+  variable: "--font-bit-count-grid-double",
   subsets: ["latin"]
 });
 
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${delaGothicOne.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bitCountGridDouble.variable} antialiased`}
       >
          <ThemeProvider
             attribute="class"
