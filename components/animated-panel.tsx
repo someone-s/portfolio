@@ -45,7 +45,7 @@ export function AnimatedPanel({
             <div className="animated-picture size-full flex flex-col items-center justify-center">
               <div className="flex-none w-[80%] h-[80%]
                               bg-popover shadow
-                              rounded-l-xl border-l border-y">
+                              rounded-xl border">
                 {children}
               </div>
             </div>
