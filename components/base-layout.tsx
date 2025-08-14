@@ -8,8 +8,7 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import basePath from "./base-path"
+} from "@/components/ui/navigation-menu";
 import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
 
@@ -113,7 +112,7 @@ export default function BaseLayout({
 }: React.ComponentPropsWithoutRef<"div">) {
 	return (
 		<div className="w-full min-h-screen">
-			<div className="fixed flex flex-row justify-center w-full">
+			<div className="fixed flex flex-row justify-center w-full z-10">
 				<div className="bg-popover shadow md:rounded-xl
 												border-b md:border
 												w-full md:w-2xl

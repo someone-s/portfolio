@@ -1,3 +1,4 @@
+import AnimatedFlyin from "@/components/animated-flyin";
 import BaseLayout from "@/components/base-layout";
 
 
@@ -9,7 +10,8 @@ export default function Home() {
         </div>
         <div id="experience" className="h-96 bg-amber-900">
         </div>
-        <div id="section2" className="h-96 bg-amber-300">
+        <AnimatedFlyin></AnimatedFlyin>
+        <div id="section2" className="h-screen bg-amber-300">
 
         </div>
       </div>
