@@ -25,10 +25,10 @@ export function AnimatedPanel({
     }, {
       scrollTrigger: {
         trigger: sectionArea.current,
-        start: "50% center",
+        start: "0% center",
         end: "150% center",
         scrub: true,
-        snap: [0, 1]
+        snap: [1/3, 1],
       },
       y: (sectionPanels.current ? (sectionPanels.current.childElementCount - 1) : 0) * 100 + 'vh',
       ease: "none"
