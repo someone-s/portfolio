@@ -58,7 +58,7 @@ export default function AnimatedLanding({
         <div className="animated-panel h-full flex flex-col items-center justify-center">
           <div className="animated-picture  w-[80%] h-[80%]">
             <div className="animated-background shadow rounded-xl size-full
-                            bg-cover dark:bg-gray-400 bg-blend-multiply
+                            bg-center bg-cover dark:bg-gray-400 bg-blend-multiply
                             flex flex-col items-center justify-center
                             text-4xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl
                             text-center text-nowrap
