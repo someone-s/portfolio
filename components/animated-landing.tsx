@@ -18,6 +18,7 @@ export default function AnimatedLanding({
   gsap.registerPlugin(ScrambleTextPlugin);
 
   const sectionContainer = useRef<HTMLDivElement>(null);
+  const scrambleContainer = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
 
@@ -34,13 +35,17 @@ export default function AnimatedLanding({
     tl
       .fromTo('.animated-background', {
         backgroundPositionY: "50%",
+        y: "0%",
+        height: "100%",
       }, {
         duration: 100,
-        backgroundPositionY: "0%"
+        backgroundPositionY: "0%",
+        y: "100%",
+        height: "50%",
       }, 0)
-      .to('.scramble', {
+      .to(scrambleContainer.current, {
         duration: 100,
-        scrambleText: "xKCd2347"
+        scrambleText: "x4K32cd1a3df5".substring(0, scrambleContainer.current?.textContent.length),
       }, 0);
 
 
@@ -52,11 +57,13 @@ export default function AnimatedLanding({
       <div className="animated-area w-full h-screen bg-background">
         <div className="animated-panel h-full flex flex-col items-center justify-center">
           <div className="animated-picture  w-[80%] h-[80%]">
-            <div className={`animated-background shadow rounded-xl size-full
-                            bg-[url(${image})] bg-cover
+            <div className="animated-background shadow rounded-xl size-full
+                            bg-cover dark:bg-gray-400 bg-blend-multiply
                             flex flex-col items-center justify-center
-                            text-9xl`}>
-              <b className="scramble display-font">{phrase}</b></div>
+                            text-4xl md:text-9xl
+                            text-rose-100 dark:text-rose-900" style={{backgroundImage: `url(${image})`}}>
+              <div ref={scrambleContainer} className="scramble display-font">{phrase}</div>
+            </div>
           </div>
         </div>
       </div>
