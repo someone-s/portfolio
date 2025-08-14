@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
+import { fetchInternalImage } from "next/dist/server/image-optimizer";
 
 function HomePopup() {
 	return (
@@ -18,7 +19,7 @@ function HomePopup() {
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
 					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/portfolio/images/scotland.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
+													bg-[url(/portfolio/images/scotland.jpg)] bg-cover bg-center bg-gray-300 bg-blend-multiply"
 						href="/"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
@@ -49,7 +50,7 @@ function ProjectsPopup() {
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
 					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/portfolio/images/barcelona.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
+													bg-[url(/portfolio/images/barcelona.jpg)] bg-cover bg-center bg-gray-300 bg-blend-multiply"
 						href="/projects"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
@@ -61,13 +62,13 @@ function ProjectsPopup() {
 					</Link>
 				</NavigationMenuLink>
 			</li>
-			<ListItem href="/projects/frontend" title="Frontend Development">
+			<ListItem href="/projects#frontend" title="Frontend Development">
 				Websites & Unity3D Projects
 			</ListItem>
-			<ListItem href="/projects/arts" title="Artistic Creations">
+			<ListItem href="/projects#arts" title="Artistic Creations">
 				3D Modeling & Graphic Designs
 			</ListItem>
-			<ListItem href="/projects/websites" title="Embedded Development">
+			<ListItem href="/projects#embedded" title="Embedded Development">
 				FPGA & Embedded Experiments
 			</ListItem>
 		</ul>
@@ -80,7 +81,7 @@ function BlogsPopup() {
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
 					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/portfolio/images/london.jpg)] bg-cover bg-gray-300 bg-blend-multiply"
+													bg-[url(/portfolio/images/london.jpg)] bg-cover bg-center bg-gray-300 bg-blend-multiply"
 						href="/blogs"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">

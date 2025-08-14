@@ -195,3 +195,7 @@ html {
   -ms-overflow-style: none;   /* IE and Edge */
   scrollbar-width: none;      /* Firefox */
 }
+
+.display-font {
+  font-family: var(--font-dela-gothic-one);
+}
