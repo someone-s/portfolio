@@ -3,29 +3,56 @@
 import gsap from "gsap";
 import { ScrollTrigger, ScrambleTextPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
+import { Property } from "csstype";
 
 
 export default function AnimatedLanding({
   id,
   children,
   image,
+  textLight,
+  textDark,
   phrase,
   ...props
-}: React.ComponentPropsWithoutRef<"div"> & { image: string, phrase: string }) {
+}: React.ComponentPropsWithoutRef<"div"> & { 
+  image: string,
+  textLight: Property.Color,
+  textDark: Property.Color,
+  phrase: string }) {
+
+  const { resolvedTheme } = useTheme();
+
+
   gsap.registerPlugin(useGSAP);
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(ScrambleTextPlugin);
 
   const sectionContainer = useRef<HTMLDivElement>(null);
+  const animatedBackground = useRef<HTMLDivElement>(null);
+  const animatedArea = useRef<HTMLDivElement>(null);
   const scrambleContainer = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!scrambleContainer.current) return;
+
+    switch (resolvedTheme) {
+      case 'dark':
+        scrambleContainer.current.style.color = textDark
+        break;
+      case 'light':
+        scrambleContainer.current.style.color = textLight
+        break;
+    }
+  });
 
   useGSAP(() => {
 
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: '.animated-area',
+        trigger: animatedArea.current,
         start: "50% center",
         end: "150% center",
         scrub: true,
@@ -33,7 +60,7 @@ export default function AnimatedLanding({
       },
     });
     tl
-      .fromTo('.animated-background', {
+      .fromTo(animatedBackground.current, {
         backgroundPositionY: "50%",
         y: "0%",
         height: "100%",
@@ -54,16 +81,16 @@ export default function AnimatedLanding({
 
   return (
     <div ref={sectionContainer} id={id}>
-      <div className="animated-area w-full h-screen bg-background">
-        <div className="animated-panel h-full flex flex-col items-center justify-center">
-          <div className="animated-picture  w-[80%] h-[80%]">
-            <div className="animated-background shadow rounded-xl size-full
-                            bg-center bg-cover dark:bg-gray-400 bg-blend-multiply
-                            flex flex-col items-center justify-center
-                            text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl
-                            text-center text-nowrap
-                            text-rose-100 dark:text-[#cab5c3]" style={{backgroundImage: `url(${image})`}}>
-              <div ref={scrambleContainer} className="scramble display-font">{phrase}</div>
+      <div ref={animatedArea} className="w-full h-screen bg-background">
+        <div className="h-full flex flex-col items-center justify-center">
+          <div className="w-[80%] h-[80%]">
+            <div ref={animatedBackground} className="shadow rounded-xl size-full
+                                                    bg-center bg-cover dark:bg-gray-400 bg-blend-multiply
+                                                    flex flex-col items-center justify-center
+                                                    text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl
+                                                    text-center text-nowrap
+                                                    text-[#eedee8] dark:text-[#cab5c3]" style={{backgroundImage: `url(${image})` }}>
+              <div ref={scrambleContainer} className="scramble display-font" style={{color: "rgba(0,0,0,0)" }}>{phrase}</div>
             </div>
           </div>
         </div>

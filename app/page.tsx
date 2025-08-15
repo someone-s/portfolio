@@ -7,16 +7,27 @@ import BaseLayout from "@/components/base-layout";
 export default function Home() {
   return (
     <BaseLayout>
-      <AnimatedLanding id="landing" image="/portfolio/images/loch.jpg" phrase="Hello There."></AnimatedLanding>
+
+      <AnimatedLanding
+        id="landing"
+        image="/portfolio/images/loch.jpg"
+        phrase="Hello There."
+        textLight="rgba(247, 197, 215, 1)"
+        textDark="rgba(194, 180, 185, 1)">
+      </AnimatedLanding>
+
       <AnimatedPanel id="experience">
         <div className="bg-red-300 size-5"></div>
       </AnimatedPanel>
+
       <AnimatedPanel id="interests">
         <div className="bg-green-300 size-5"></div>
-        </AnimatedPanel>
+      </AnimatedPanel>
+
       <AnimatedPanel id="contacts">
         <div className="bg-blue-300 size-5"></div>
       </AnimatedPanel>
+
     </BaseLayout>
   );
 }
