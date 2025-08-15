@@ -25,7 +25,6 @@ export default function Home() {
 
       <AnimatedPanel id="medium">
         <div className="bg-blue-300 size-5"></div>
-
       </AnimatedPanel>
     </BaseLayout>
   );
