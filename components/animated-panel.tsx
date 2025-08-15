@@ -3,42 +3,39 @@
 import gsap from "gsap";
 import { ScrollTrigger, ScrollToPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { Dispatch, RefObject, SetStateAction, useRef } from "react";
+
 export function AnimatedPanel({
-  id,
+  ref,
+  setTimeline,
+  id, 
   children,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  ref: RefObject<HTMLDivElement | null>
+  setTimeline: Dispatch<SetStateAction<GSAPTimeline | undefined>>
+}) {
   gsap.registerPlugin(useGSAP);
   gsap.registerPlugin(ScrollTrigger);
-  gsap.registerPlugin(ScrollToPlugin);
 
-  const sectionContainer = useRef<HTMLDivElement>(null);
   const sectionArea = useRef<HTMLDivElement>(null);
   const sectionPanels = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-
-
-    gsap.fromTo(sectionPanels.current, {
-      y: 0
-    }, {
+    setTimeline(gsap.timeline({
       scrollTrigger: {
         trigger: sectionArea.current,
         start: "0% center",
         end: "100% center",
         scrub: true,
-        snap: [-0.5, 0.5, 1.5]
-      },
-      y: (sectionPanels.current ? (sectionPanels.current.childElementCount - 1) : 0) * 100 + 'vh',
-      ease: "none"
-    });
-
-  }, { scope: sectionContainer });
+        snap: [-0.5, 0.5, 1.5],
+      }
+    }));
+  }, {scope: ref});
 
 
   return (
-    <div ref={sectionContainer} id={id}>
+    <div ref={ref} id={id}>
       <div ref={sectionArea} className="w-full h-screen">
         <div ref={sectionPanels} className={`h-full flex flex-col`}>
           <div className="w-screen h-full flex-none">
