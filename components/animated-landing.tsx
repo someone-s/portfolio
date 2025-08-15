@@ -88,8 +88,7 @@ export default function AnimatedLanding({
                                                     bg-center bg-cover dark:bg-gray-400 bg-blend-multiply
                                                     flex flex-col items-center justify-center
                                                     text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl
-                                                    text-center text-nowrap
-                                                    text-[#eedee8] dark:text-[#cab5c3]" style={{backgroundImage: `url(${image})` }}>
+                                                    text-center text-nowrap" style={{backgroundImage: `url(${image})` }}>
               <div ref={scrambleContainer} className="scramble display-font" style={{color: "rgba(0,0,0,0)" }}>{phrase}</div>
             </div>
           </div>

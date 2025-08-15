@@ -9,9 +9,9 @@ export default function Home() {
 
       <AnimatedLanding
         id="landing"
-        image="/portfolio/images/frioul.jpg"
+        image="/portfolio/images/cotedazor.jpg"
         phrase="Random Ramblings."
-        textLight="rgba(182, 224, 247, 1)"
+        textLight="rgba(227, 249, 255, 1)"
         textDark="rgba(157, 183, 201, 1)">
       </AnimatedLanding>
 
