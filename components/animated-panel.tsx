@@ -1,19 +1,23 @@
 "use client"
 
 import gsap from "gsap";
-import { ScrollTrigger, ScrollToPlugin } from "gsap/all";
+import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { Dispatch, RefObject, SetStateAction, useRef } from "react";
 
 export function AnimatedPanel({
   ref,
-  setTimeline,
-  id, 
+  innerSegmentCount,
+  setOuterTimeline,
+  setInnerTimeline,
+  id,
   children,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & {
   ref: RefObject<HTMLDivElement | null>
-  setTimeline: Dispatch<SetStateAction<GSAPTimeline | undefined>>
+  innerSegmentCount: number
+  setOuterTimeline?: Dispatch<SetStateAction<GSAPTimeline | undefined>>
+  setInnerTimeline?: Dispatch<SetStateAction<GSAPTimeline | undefined>>
 }) {
   gsap.registerPlugin(useGSAP);
   gsap.registerPlugin(ScrollTrigger);
@@ -22,16 +26,45 @@ export function AnimatedPanel({
   const sectionPanels = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    setTimeline(gsap.timeline({
+
+    const count = innerSegmentCount;
+    const outerLowerSnap = 1 / (1.5 + (0.5 * count));
+    const outerUpperSnap = 1 - outerLowerSnap;
+  
+    const outerTl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionArea.current,
-        start: "0% center",
-        end: "100% center",
+        start: "0% bottom",
+        end: `${50 + 50 * count}% top`,
         scrub: true,
-        snap: [-0.5, 0.5, 1.5],
+        snap: (progress, self) => {
+          if (progress < outerLowerSnap)
+            return self?.direction == 1 ? outerLowerSnap : 0;
+          else if (progress > outerUpperSnap)
+            return self?.direction == 1 ? 1 : outerUpperSnap;
+          else
+            return progress;
+        }
       }
-    }));
-  }, {scope: ref});
+    });
+    if (setOuterTimeline)
+      setOuterTimeline(outerTl);
+
+    const innerTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionArea.current,
+        start: "50% center",
+        end: `${50 * count}% center`,
+        scrub: true,
+        pin: true,
+        markers: true,
+        snap: 1/Math.max(count - 1, 1)
+      }
+    });
+    if (setInnerTimeline)
+      setInnerTimeline(innerTl);
+
+  }, { scope: ref });
 
 
   return (

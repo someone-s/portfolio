@@ -29,15 +29,15 @@ export default function Blogs() {
         textDark="rgba(157, 183, 201, 1)">
       </AnimatedLanding>
 
-      <AnimatedPanel ref={featuredPanel} setTimeline={setFeaturedTl} id="featured">
+      <AnimatedPanel ref={featuredPanel} innerSegmentCount={1} setOuterTimeline={setFeaturedTl} id="featured">
         <div className="bg-red-300 size-5"></div>
       </AnimatedPanel>
 
-      <AnimatedPanel ref={allPanel} setTimeline={setAllTl} id="all">
+      <AnimatedPanel ref={allPanel} innerSegmentCount={1} setOuterTimeline={setAllTl} id="all">
         <div className="bg-green-300 size-5"></div>
       </AnimatedPanel>
 
-      <AnimatedPanel ref={mediumPanel} setTimeline={setMediumTl} id="medium">
+      <AnimatedPanel ref={mediumPanel} innerSegmentCount={1} setOuterTimeline={setMediumTl} id="medium">
         <div className="bg-blue-300 size-5"></div>
       </AnimatedPanel>
     </BaseLayout>

@@ -50,11 +50,11 @@ function ProjectsPopup() {
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
 					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/portfolio/images/barcelona.jpg)] bg-cover bg-center bg-gray-300 bg-blend-multiply"
+													bg-[url(/portfolio/images/barcelona.jpg)] bg-cover bg-center bg-gray-400 bg-blend-multiply"
 						href="/projects"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
-							Things I Have Made
+							Things I've Made
 						</div>
 						<p className="text-white text-sm leading-tight text-shadow-lg">
 							A wide selection
@@ -81,7 +81,7 @@ function BlogsPopup() {
 			<li className="row-span-3">
 				<NavigationMenuLink asChild>
 					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
-													bg-[url(/portfolio/images/london.jpg)] bg-cover bg-center bg-gray-300 bg-blend-multiply"
+													bg-[url(/portfolio/images/london.jpg)] bg-cover bg-center bg-gray-400 bg-blend-multiply"
 						href="/blogs"
 					>
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
@@ -112,7 +112,7 @@ export default function BaseLayout({
 	...props
 }: React.ComponentPropsWithoutRef<"div">) {
 	return (
-		<div className="w-full min-h-screen">
+		<div className="w-full min-h-screen font-sans">
 			<div className="fixed flex flex-row justify-center w-full z-10">
 				<div className="bg-popover shadow md:rounded-xl
 												border-b md:border
