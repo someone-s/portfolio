@@ -28,15 +28,15 @@ export default function Projects() {
         textDark="rgba(151, 185, 173, 1)">
       </AnimatedLanding>
 
-      <AnimatedPanel ref={frontendPanel} setTimeline={setFrontendTl} id="frontend">
+      <AnimatedPanel ref={frontendPanel} innerSegmentCount={1} setOuterTimeline={setFrontendTl} id="frontend">
         <div className="bg-red-300 size-5"></div>
       </AnimatedPanel>
 
-      <AnimatedPanel ref={artsPanel} setTimeline={setArtsTl} id="arts">
+      <AnimatedPanel ref={artsPanel} innerSegmentCount={1} setOuterTimeline={setArtsTl} id="arts">
         <div className="bg-green-300 size-5"></div>
       </AnimatedPanel>
 
-      <AnimatedPanel ref={embeddedPanel} setTimeline={setEmbeddedTl} id="embedded">
+      <AnimatedPanel ref={embeddedPanel} innerSegmentCount={1} setOuterTimeline={setEmbeddedTl} id="embedded">
         <div className="bg-blue-300 size-5"></div>
       </AnimatedPanel>
 
