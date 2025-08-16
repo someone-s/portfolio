@@ -55,7 +55,6 @@ export default function AnimatedLanding({
         trigger: animatedArea.current,
         start: "center center",
         end: "100% top",
-        markers: true,
         scrub: true,
         snap: [0, 1]
       },
