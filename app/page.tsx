@@ -47,7 +47,7 @@ function ExperiencePanel() {
     const snapDuration = getSnapPercentage(snapInterval) * 100;
 
     outerTl
-      .from(headerRef.current, { scrambleText: "x4K32cd1a3df5".substring(0, headerRef.current?.textContent.length), duration: snapDuration }, 0)
+      .from(headerRef.current, { scrambleText: "x4K32cd1a3df5".substring(0, headerRef.current?.textContent.length), duration: snapDuration * 0.95 }, 0)
       .fromTo(squareRef.current, { backgroundPositionY: "100%", }, { backgroundPositionY: "60%", duration: snapDuration }, 0)
       .fromTo(squareRef.current, { backgroundPositionY: "70%", }, { backgroundPositionY: "0%", duration: snapDuration }, 100 - snapDuration)
 

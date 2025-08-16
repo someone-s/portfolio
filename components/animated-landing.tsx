@@ -53,8 +53,9 @@ export default function AnimatedLanding({
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: animatedArea.current,
-        start: "50% center",
-        end: "150% center",
+        start: "center center",
+        end: "100% top",
+        markers: true,
         scrub: true,
         snap: [0, 1]
       },
