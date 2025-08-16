@@ -32,21 +32,21 @@ export function AnimatedPanel({
     const count = innerSegmentCount;
     const outerLowerSnap = getSnapPercentage(count);
     const outerUpperSnap = 1 - outerLowerSnap;
-  
+
     const outerTl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionArea.current,
         start: "0% bottom",
         end: `${50 + 50 * count}% top`,
         scrub: true,
-        // snap: (progress, self) => {
-        //   if (progress < outerLowerSnap)
-        //     return self?.direction == 1 ? outerLowerSnap : 0;
-        //   else if (progress > outerUpperSnap)
-        //     return self?.direction == 1 ? 1 : outerUpperSnap;
-        //   else
-        //     return progress;
-        // }
+        snap: (progress, self) => {
+          if (progress < outerLowerSnap)
+            return self?.direction == 1 ? outerLowerSnap : 0;
+          else if (progress > outerUpperSnap)
+            return self?.direction == 1 ? 1 : outerUpperSnap;
+          else
+            return progress;
+        }
       }
     });
     if (setOuterTimeline)
@@ -61,8 +61,13 @@ export function AnimatedPanel({
         end: `${50 * count}% center`,
         scrub: true,
         pin: true,
-        markers: true,
-        // snap: (progress, self) => innerSnap(progress, self?.direction),
+        snap: (progress, self) => {
+          const closest = innerSnap(progress, self?.direction);
+          if (Math.abs(closest - progress) < 1 / Math.max(count - 1, 1))
+            return closest;
+          else
+            return progress;
+        },
       }
     });
     if (setInnerTimeline)
@@ -77,7 +82,7 @@ export function AnimatedPanel({
         <div ref={sectionPanels} className={`h-full flex flex-col`}>
           <div className="w-screen h-full flex-none">
             <div className="size-full flex flex-col items-center justify-center">
-                {children}
+              {children}
             </div>
           </div>
         </div>
