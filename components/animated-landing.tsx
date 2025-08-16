@@ -56,7 +56,6 @@ export default function AnimatedLanding({
         start: "center center",
         end: "100% top",
         scrub: true,
-        snap: [0, 1]
       },
     });
     tl
