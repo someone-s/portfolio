@@ -39,14 +39,14 @@ export function AnimatedPanel({
         start: "0% bottom",
         end: `${50 + 50 * count}% top`,
         scrub: true,
-        snap: (progress, self) => {
-          if (progress < outerLowerSnap)
-            return self?.direction == 1 ? outerLowerSnap : 0;
-          else if (progress > outerUpperSnap)
-            return self?.direction == 1 ? 1 : outerUpperSnap;
-          else
-            return progress;
-        }
+        // snap: (progress, self) => {
+        //   if (progress < outerLowerSnap)
+        //     return self?.direction == 1 ? outerLowerSnap : 0;
+        //   else if (progress > outerUpperSnap)
+        //     return self?.direction == 1 ? 1 : outerUpperSnap;
+        //   else
+        //     return progress;
+        // }
       }
     });
     if (setOuterTimeline)
@@ -62,7 +62,7 @@ export function AnimatedPanel({
         scrub: true,
         pin: true,
         markers: true,
-        snap: (progress, self) => innerSnap(progress, self?.direction),
+        // snap: (progress, self) => innerSnap(progress, self?.direction),
       }
     });
     if (setInnerTimeline)
