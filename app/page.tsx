@@ -38,6 +38,7 @@ function ExperiencePanel() {
   const snapInterval = 7;
 
   const panelRef = useRef<HTMLDivElement>(null);
+  const areaRef = useRef<HTMLDivElement>(null);
   const squareRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [outerTl, setOuterTl] = useState<GSAPTimeline>();
@@ -50,6 +51,9 @@ function ExperiencePanel() {
       .from(headerRef.current, { scrambleText: "x4K32cd1a3df5".substring(0, headerRef.current?.textContent.length), duration: snapDuration * 0.95 }, 0)
       .fromTo(squareRef.current, { backgroundPositionY: "100%", }, { backgroundPositionY: "60%", duration: snapDuration }, 0)
       .fromTo(squareRef.current, { backgroundPositionY: "70%", }, { backgroundPositionY: "0%", duration: snapDuration }, 100 - snapDuration)
+
+      .fromTo(areaRef.current, { height: "0%", }, { height: "100%", duration: snapDuration }, 0)
+      .fromTo(areaRef.current, { height: "100%", }, { height: "50%", duration: snapDuration }, 100 - snapDuration)
 
       .set({}, {}, 100);
   }, [outerTl]);
@@ -84,7 +88,7 @@ function ExperiencePanel() {
 
   return (
     <AnimatedPanel ref={panelRef} innerSegmentCount={snapInterval} setOuterTimeline={setOuterTl} setInnerTimeline={setInnerTl} id="experience">
-      <div className="flex-none size-full flex items-center justify-center">
+      <div ref={areaRef} className="flex-none size-full flex items-center justify-center">
         <div className="unique-class size-[80%] flex flex-col rounded-2xl overflow-hidden   text-[#FAC5D6] dark:text-[#C3B4B9]">
 
 
@@ -184,6 +188,8 @@ export default function Home() {
         textLight="rgba(247, 197, 215, 1)"
         textDark="rgba(194, 180, 185, 1)">
       </AnimatedLanding>
+
+      <ExperiencePanel></ExperiencePanel>
 
       <ExperiencePanel></ExperiencePanel>
 
