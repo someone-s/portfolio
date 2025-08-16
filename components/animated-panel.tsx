@@ -30,8 +30,6 @@ export function AnimatedPanel({
   useGSAP(() => {
 
     const count = innerSegmentCount;
-    const outerLowerSnap = getSnapPercentage(count);
-    const outerUpperSnap = 1 - outerLowerSnap;
 
     const outerTl = gsap.timeline({
       scrollTrigger: {
@@ -39,20 +37,10 @@ export function AnimatedPanel({
         start: "0% bottom",
         end: `${50 + 50 * count}% top`,
         scrub: true,
-        snap: (progress, self) => {
-          if (progress < outerLowerSnap)
-            return self?.direction == 1 ? outerLowerSnap : 0;
-          else if (progress > outerUpperSnap)
-            return self?.direction == 1 ? 1 : outerUpperSnap;
-          else
-            return progress;
-        }
       }
     });
     if (setOuterTimeline)
       setOuterTimeline(outerTl);
-
-    const innerSnap = ScrollTrigger.snapDirectional(1 / Math.max(count - 1, 1));
 
     const innerTl = gsap.timeline({
       scrollTrigger: {
@@ -61,13 +49,6 @@ export function AnimatedPanel({
         end: `${50 * count}% center`,
         scrub: true,
         pin: true,
-        snap: (progress, self) => {
-          const closest = innerSnap(progress, self?.direction);
-          if (Math.abs(closest - progress) < 1 / Math.max(count - 1, 1))
-            return closest;
-          else
-            return progress;
-        },
       }
     });
     if (setInnerTimeline)
