@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
-import { fetchInternalImage } from "next/dist/server/image-optimizer";
 
 function HomePopup() {
 	return (

@@ -81,7 +81,7 @@ export default function AnimatedLanding({
 
   return (
     <div ref={sectionContainer} id={id}>
-      <div ref={animatedArea} className="w-full h-screen bg-background">
+      <div ref={animatedArea} className="w-full h-screen">
         <div className="h-full flex flex-col items-center justify-center">
           <div className="w-[80%] h-[80%]">
             <div ref={animatedBackground} className="shadow rounded-xl size-full

@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { Dispatch, RefObject, SetStateAction, useRef } from "react";
 
+export function getSnapPercentage(innerSegmentCount: number): number { return 1 / (1.5 + (0.5 * innerSegmentCount)); }
+
 export function AnimatedPanel({
   ref,
   innerSegmentCount,
@@ -28,7 +30,7 @@ export function AnimatedPanel({
   useGSAP(() => {
 
     const count = innerSegmentCount;
-    const outerLowerSnap = 1 / (1.5 + (0.5 * count));
+    const outerLowerSnap = getSnapPercentage(count);
     const outerUpperSnap = 1 - outerLowerSnap;
   
     const outerTl = gsap.timeline({
@@ -50,6 +52,8 @@ export function AnimatedPanel({
     if (setOuterTimeline)
       setOuterTimeline(outerTl);
 
+    const innerSnap = ScrollTrigger.snapDirectional(1 / Math.max(count - 1, 1));
+
     const innerTl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionArea.current,
@@ -58,7 +62,7 @@ export function AnimatedPanel({
         scrub: true,
         pin: true,
         markers: true,
-        snap: 1/Math.max(count - 1, 1)
+        snap: (progress, self) => innerSnap(progress, self?.direction),
       }
     });
     if (setInnerTimeline)
@@ -72,12 +76,8 @@ export function AnimatedPanel({
       <div ref={sectionArea} className="w-full h-screen">
         <div ref={sectionPanels} className={`h-full flex flex-col`}>
           <div className="w-screen h-full flex-none">
-            <div className="animated-picture size-full flex flex-col items-center justify-center">
-              <div className="flex-none w-[80%] h-[80%]
-                              bg-popover shadow
-                              rounded-xl border">
+            <div className="size-full flex flex-col items-center justify-center">
                 {children}
-              </div>
             </div>
           </div>
         </div>
