@@ -1,6 +1,5 @@
 "use client"
 
-import AnimatedLanding from "@/components/animated-landing";
 import BaseLayout from "@/components/base-layout";
 import { useRef, useState } from "react";
 
@@ -19,14 +18,6 @@ export default function Blogs() {
 
   return (
     <BaseLayout>
-
-      <AnimatedLanding
-        id="landing"
-        image="/portfolio/images/cotedazor.jpg"
-        phrase="Random Ramblings."
-        textLight="rgba(227, 249, 255, 1)"
-        textDark="rgba(157, 183, 201, 1)">
-      </AnimatedLanding>
 
     </BaseLayout>
   );
