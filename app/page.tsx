@@ -6,7 +6,6 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, ScrambleTextPlugin, TextPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import { useMeasure } from "@uidotdev/usehooks";
 
 
 function ExperiencePointList({
@@ -39,8 +38,6 @@ export default function Home() {
   gsap.registerPlugin(ScrambleTextPlugin);
 
   const scope = useRef(null);
-
-  const [expScrollElRef, size] = useMeasure();
 
 
   useGSAP(() => {
@@ -144,7 +141,7 @@ export default function Home() {
 
                   <div id="experience-content" className="p-5 pt-10">
 
-                    <div id="experience-scroll" ref={expScrollElRef} className="w-full h-full flex flex-row gap-2">
+                    <div id="experience-scroll" className="w-full h-full flex flex-row gap-2">
 
                       <ExperiencePointList
                         title="Software Developer (XR/AR)"
