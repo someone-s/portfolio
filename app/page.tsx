@@ -118,15 +118,15 @@ export default function Home() {
         .add('interestsStartLabel', '>')
         .to('#title-text', { scrambleText: "Interests", duration: 1 }, 'interestsStartLabel')
         .to('#interests-area', { y: `-=${eP - 6}%`, duration: 1 }, 'interestsStartLabel')
+        .add(getAnimationPersonLoopingTimeline().timeScale(4).tweenFromTo(0, interestsDuration * 4), 'interestsStartLabel')
         //
         .add('interestsScrollLabel', 'interestsStartLabel+=5')
         .to('#sprite-cube', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel-=0.5`)
-        .to('#sprite-graphic', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${interestsDuration/3-0.5}`)
-        .to('#sprite-mountain', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${interestsDuration/3*2-0.5}`)
+        .to('#sprite-graphic', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration-5)/3-0.5}`)
+        .to('#sprite-mountain', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration-5)/3*2-0.5}`)
         //
-        .add(getAnimationPersonLoopingTimeline().timeScale(4).tweenFromTo(0, interestsDuration * 4), 'interestsScrollLabel')
-        .to('#sprite-person', { x: ()=>scrollAmount('interests-scroll'), duration: interestsDuration }, 'interestsScrollLabel')
-        .to('#interests-scroll', { x: () => -scrollAmount('interests-scroll'), duration: interestsDuration }, 'interestsScrollLabel')
+        .to('#sprite-person', { x: ()=>scrollAmount('interests-scroll'), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
+        .to('#interests-scroll', { x: () => -scrollAmount('interests-scroll'), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
 
         // Contacts Area
         .to('#title-text', { scrambleText: "Contacts", duration: 1 }, '>')
@@ -138,24 +138,24 @@ export default function Home() {
 
     //md
     mm.add("(min-width: 768px)", () => {
-      flow(45, '+=1000%', 10, 10);
+      flow(45, '+=1000%', 10, 16);
     });
 
     //sm
     mm.add("(min-width: 640px) and (max-width: 767px)", () => {
-      flow(55, '+=300%', 5, 5);
+      flow(55, '+=500%', 5, 8);
     });
 
 
     mm.add("(min-width: 480px) and (max-width: 639px)", () => {
-      flow(70, '+=300%', 5, 5);
+      flow(70, '+=500%', 5, 8);
     });
 
     mm.add("(max-width: 479px) and (min-height: 768px)", () => {
-      flow(80, '+=300%', 5, 5);
+      flow(80, '+=500%', 5, 8);
     });
     mm.add("(max-width: 479px) and (max-height: 767px)", () => {
-      flow(90, '+=300%', 5, 5);
+      flow(90, '+=500%', 5, 8);
     });
 
 
