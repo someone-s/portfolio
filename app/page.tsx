@@ -18,10 +18,11 @@ function ExperiencePointList({
   location: string
 }) {
   return (
-    <div className="shrink-0 border p-5 bg-accent rounded-md">
-      <div>{title}</div>
-      <div>{location}</div>
-      <ul className="list-inside list-disc">
+    <div className="shrink-0 border p-5 bg-accent rounded-md max-w-full">
+      <div className="font-sans-heavy 
+                      text-lg sm:text-xl md:text-2xl">{title}</div>
+      <div className="mb-1">{location}</div>
+      <ul className="list-outside list-disc pl-5">
         {children}
       </ul>
     </div>
@@ -38,50 +39,78 @@ export default function Home() {
   gsap.registerPlugin(ScrambleTextPlugin);
 
   const scope = useRef(null);
-  
+
   const [expScrollElRef, size] = useMeasure();
 
 
   useGSAP(() => {
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#view-area",
-        start: "top top",
-        end: "+=300% bottom",
-        onUpdate: ({ progress }) => console.log(progress),
-        pin: true,
-        invalidateOnRefresh: true,
-        markers: true,
-        scrub: true,
-      },
-    });
+    const flow = (
+      expandPercent: number
+    ) => {
+      const eP = expandPercent;
 
-    const func = () => {
-      const expScrollEl = document.getElementById('experience-scroll');
-      const expScrollAmnt = expScrollEl ? expScrollEl.scrollWidth - expScrollEl.clientWidth : 0;
-      return -expScrollAmnt;
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#view-area",
+          start: "top top",
+          end: "+=300% bottom",
+          onUpdate: ({ progress }) => console.log(progress),
+          pin: true,
+          invalidateOnRefresh: true,
+          markers: true,
+          scrub: true,
+        },
+      });
+
+
+
+      const scrollAmount = (elementId:string) => {
+        const expScrollEl = document.getElementById(elementId);
+        const expScrollAmount = expScrollEl ? expScrollEl.scrollWidth - expScrollEl.clientWidth : 0;
+        return -expScrollAmount;
+      }
+
+      tl
+        .set('#title-text', { text: "Hello There." }, 0)
+        .set('#experience-area', { y: "-6%" }, '<')
+        .set('#interests-area', { y: "-104%" }, '<')
+        .set('#contacts-area', { y: "-202%" }, '<')
+        .set('#experience-content', {height: `${eP-4}%` }, '<')
+
+        .to('#title-area', { height: `${100-eP}%`, duration: 1 }, 1)
+        .to('#title-background', { y: "-20%", duration: 1 }, '<')
+        .to('#title-text', { scrambleText: "Experience", duration: 1 }, '<')
+        .to('#experience-area', { y: `-=${eP-6}%`, duration: 1 }, '<')
+
+        .to('#experience-scroll', { x: () => scrollAmount('experience-scroll'), duration: 5 }, '>')
+
+        .to('#title-text', { scrambleText: "Interests", duration: 1 }, '>')
+        .to('#interests-area', { y: `-=${eP-6}%`, duration: 1 }, '<')
+
+        .to('#title-text', { scrambleText: "Contacts", duration: 1 }, '>')
+        .to('#contacts-area', { y: `-=${eP-6}%`, duration: 1 }, '<')
+        ;
     }
 
-    tl
-      .set('#title-text', { text: "Hello There." }, 0)
-      .set('#experience-area', { y: "-6%" }, '<')
-      .set('#interests-area', { y: "-104%" }, '<')
-      .set('#contacts-area', { y: "-202%" }, '<')
+    const mm = gsap.matchMedia();
 
-      .to('#title-area', { height: "60%", duration: 1 }, 1)
-      .to('#title-background', { y: "-20%", duration: 1 }, '<')
-      .to('#title-text', { scrambleText: "Experience", duration: 1 }, '<')
-      .to('#experience-area', { y: "-=34%", duration: 1 }, '<')
+    //md
+    mm.add("(min-width: 768px)", () => {
+      flow(40);
+    });
 
-      .to('#experience-scroll', { x: func, duration: 1 }, '>')
+    //sm
+    mm.add("(min-width: 640px) and (max-width: 767px)", () => {
+      flow(55);
+    });
 
-      .to('#title-text', { scrambleText: "Interests", duration: 1 }, '>')
-      .to('#interests-area', { y: "-=34%", duration: 1 }, '<')
+    
+    mm.add("(max-width: 639px)", () => {
+      flow(70);
+    });
 
-      .to('#title-text', { scrambleText: "Contacts", duration: 1 }, '>')
-      .to('#contacts-area', { y: "-=34%", duration: 1 }, '<')
-      ;
+
 
 
   }, { scope: scope });
@@ -93,8 +122,8 @@ export default function Home() {
           <div className="h-full flex flex-col items-center justify-center">
             <div className="w-[80%] h-[80%]">
               <div className="shadow rounded-xl size-full
-                                                      flex flex-col
-                                                      overflow-hidden">
+                              flex flex-col
+                              overflow-hidden">
 
                 <div className="size-full shrink-0 flex flex-col overflow-hidden">
                   <div id="title-background" className="size-full shrink-0 bg-[url(/portfolio/images/loch.jpg)] bg-center bg-cover"></div>
@@ -113,9 +142,9 @@ export default function Home() {
                                                   bg-popover shadow-2xl">
 
 
-                  <div className="h-[36%] p-5 pt-10">
+                  <div id="experience-content" className="p-5 pt-10">
 
-                    <div id="experience-scroll" ref={expScrollElRef} className="w-full flex flex-row gap-2">
+                    <div id="experience-scroll" ref={expScrollElRef} className="w-full h-full flex flex-row gap-2">
 
                       <ExperiencePointList
                         title="Software Developer (XR/AR)"
