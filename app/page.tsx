@@ -17,11 +17,11 @@ function ExperiencePointList({
   location: string
 }) {
   return (
-    <div className="shrink-0 border p-5 bg-accent rounded-md max-w-full">
+    <div className="shrink-0 border p-5 bg-accent rounded-md max-w-full overflow-hidden">
       <div className="font-sans-heavy 
                       text-lg sm:text-xl md:text-2xl">{title}</div>
       <div className="mb-1">{location}</div>
-      <ul className="list-outside list-disc pl-5">
+      <ul className="list-outside list-disc pl-5 text-base">
         {children}
       </ul>
     </div>
@@ -43,7 +43,10 @@ export default function Home() {
   useGSAP(() => {
 
     const flow = (
-      expandPercent: number
+      expandPercent: number,
+      duration: string,
+      experienceDuration: number,
+      interestsDuration: number
     ) => {
       const eP = expandPercent;
 
@@ -51,18 +54,18 @@ export default function Home() {
         scrollTrigger: {
           trigger: "#view-area",
           start: "top top",
-          end: "+=300% bottom",
+          end: `${duration} bottom`,
           onUpdate: ({ progress }) => console.log(progress),
+          scrub: true,
           pin: true,
           invalidateOnRefresh: true,
           markers: true,
-          scrub: true,
         },
       });
 
 
 
-      const scrollAmount = (elementId:string) => {
+      const scrollAmount = (elementId: string) => {
         const expScrollEl = document.getElementById(elementId);
         const expScrollAmount = expScrollEl ? expScrollEl.scrollWidth - expScrollEl.clientWidth : 0;
         return -expScrollAmount;
@@ -73,20 +76,23 @@ export default function Home() {
         .set('#experience-area', { y: "-6%" }, '<')
         .set('#interests-area', { y: "-104%" }, '<')
         .set('#contacts-area', { y: "-202%" }, '<')
-        .set('#experience-content', {height: `${eP-4}%` }, '<')
+        .set('#experience-content', { height: `${eP - 4}%` }, '<')
+        .set('#interests-content', { height: `${eP - 4}%` }, '<')
 
-        .to('#title-area', { height: `${100-eP}%`, duration: 1 }, 1)
+        .to('#title-area', { height: `${100 - eP}%`, duration: 1 }, 1)
         .to('#title-background', { y: "-20%", duration: 1 }, '<')
         .to('#title-text', { scrambleText: "Experience", duration: 1 }, '<')
-        .to('#experience-area', { y: `-=${eP-6}%`, duration: 1 }, '<')
+        .to('#experience-area', { y: `-=${eP - 6}%`, duration: 1 }, '<')
 
-        .to('#experience-scroll', { x: () => scrollAmount('experience-scroll'), duration: 5 }, '>')
+        .to('#experience-scroll', { x: () => scrollAmount('experience-scroll'), duration: experienceDuration }, '>')
 
         .to('#title-text', { scrambleText: "Interests", duration: 1 }, '>')
-        .to('#interests-area', { y: `-=${eP-6}%`, duration: 1 }, '<')
+        .to('#interests-area', { y: `-=${eP - 6}%`, duration: 1 }, '<')
+
+        .to('#interests-scroll', { x: () => scrollAmount('interests-scroll'), duration: interestsDuration }, '>')
 
         .to('#title-text', { scrambleText: "Contacts", duration: 1 }, '>')
-        .to('#contacts-area', { y: `-=${eP-6}%`, duration: 1 }, '<')
+        .to('#contacts-area', { y: `-=${eP - 6}%`, duration: 1 }, '<')
         ;
     }
 
@@ -94,20 +100,25 @@ export default function Home() {
 
     //md
     mm.add("(min-width: 768px)", () => {
-      flow(40);
+      flow(45, '+=1000%', 10, 10);
     });
 
     //sm
     mm.add("(min-width: 640px) and (max-width: 767px)", () => {
-      flow(55);
-    });
-
-    
-    mm.add("(max-width: 639px)", () => {
-      flow(70);
+      flow(55, '+=300%', 5, 5);
     });
 
 
+    mm.add("(min-width: 480px) and (max-width: 639px)", () => {
+      flow(70, '+=300%', 5, 5);
+    });
+
+    mm.add("(max-width: 479px) and (min-height: 768px)", () => {
+      flow(80, '+=300%', 5, 5);
+    });
+    mm.add("(max-width: 479px) and (max-height: 767px)", () => {
+      flow(90, '+=300%', 5, 5);
+    });
 
 
   }, { scope: scope });
@@ -138,8 +149,7 @@ export default function Home() {
                                                   rounded-lg border-t
                                                   bg-popover shadow-2xl">
 
-
-                  <div id="experience-content" className="p-5 pt-10">
+                  <div id="experience-content" className="m-0.25 p-4.75 pt-9.75 overflow-hidden">
 
                     <div id="experience-scroll" className="w-full h-full flex flex-row gap-2">
 
@@ -147,9 +157,9 @@ export default function Home() {
                         title="Software Developer (XR/AR)"
                         location="ISS Innovation Hub">
                         <li>Worked at ISS Innovation Hub, part of Lancaster University</li>
-                        <li>Develop various VR and AI experience from 0 to 1</li>
+                        <li>Develop various VR & AI experience from 0 to 1</li>
                         <li>Contribute and drive product roadmap within an Agile team</li>
-                        <li>Upheld and maintain code quality within team</li>
+                        <li>Upheld and maintain code quality</li>
                         <li>Coach and mentor junior developers</li>
                       </ExperiencePointList>
 
@@ -206,6 +216,67 @@ export default function Home() {
                                                   rounded-lg border-t
                                                   bg-popover shadow-2xl">
 
+                  <div id="interests-content" className="m-0.25 p-4.75 pt-9.75 overflow-hidden">
+
+                    <div id="interests-scroll" className="w-full h-full flex flex-row gap-2">
+
+                      <ExperiencePointList
+                        title="Software Developer (XR/AR)"
+                        location="ISS Innovation Hub">
+                        <li>Worked at ISS Innovation Hub, part of Lancaster University</li>
+                        <li>Develop various VR & AI experience from 0 to 1</li>
+                        <li>Contribute and drive product roadmap within an Agile team</li>
+                        <li>Upheld and maintain code quality within team</li>
+                        <li>Coach and mentor junior developers</li>
+                      </ExperiencePointList>
+
+
+                      <ExperiencePointList
+                        title="Associate Lecturer"
+                        location="Lancaster University">
+                        <li>Worked within the School of Comupting and Communication</li>
+                        <li>Delivering in-person lab sessions with module lecturers</li>
+                        <li>Mentor and provide academic assistant to student</li>
+                      </ExperiencePointList>
+
+                      <ExperiencePointList
+                        title="Game Programmer/Modder"
+                        location="Freelance Hire">
+                        <li>Take on commission work creating custom 3D models</li>
+                        <li>Tinker and program with Unity and C# DotNet</li>
+                        <li>Experiment with compute shader accelerated programs</li>
+                        <li>Create customized 3D assets for use in games</li>
+                      </ExperiencePointList>
+
+                      <ExperiencePointList
+                        title="Vice President"
+                        location="LU Hiking Club">
+                        <li>Worked within a team of 11, reporting to the President</li>
+                        <li>Coordinated transport and schedules, ensuring trips ran on time</li>
+                        <li>Adapted plans to changing conditions while meeting deadlines</li>
+                        <li>Ensured safety compliance, resolved member queries</li>
+                      </ExperiencePointList>
+
+                      <ExperiencePointList
+                        title="Communication Officer"
+                        location="Bowland College">
+                        <li>Deliver Lancaster University Bowland College events</li>
+                        <li>Maintained meeting records to support team organisation</li>
+                        <li>Managed ticket sales through internal systems with precision</li>
+                        <li>Communicated event information across multiple channels</li>
+                        <li>Create social media post and graphic design for posters</li>
+                      </ExperiencePointList>
+
+                      <ExperiencePointList
+                        title="Student Advisor"
+                        location="Wah Yan College Kowloon">
+                        <li>Part of the then newly created Stem Team</li>
+                        <li>Guided students on self-driven projects</li>
+                        <li>Provide constructive feedback and encouragement</li>
+                        <li>Operate and maintain 3D printers for rapid prototyping</li>
+                      </ExperiencePointList>
+                    </div>
+                  </div>
                 </div>
 
                 <div id="contacts-area" className="size-full shrink-0 
