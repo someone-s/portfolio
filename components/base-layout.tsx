@@ -129,7 +129,7 @@ export default function BaseLayout({
 	...props
 }: React.ComponentPropsWithoutRef<"div">) {
 	return (
-		<div className="w-full min-h-svh font-sans">
+		<div className="w-full min-h-screen font-sans">
 			<div className="fixed flex flex-row justify-center w-full z-10">
 				<div className="bg-popover shadow md:rounded-xl
 												border-b md:border
