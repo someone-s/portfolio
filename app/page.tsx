@@ -100,7 +100,7 @@ export default function Home() {
         // Setup experience
         .set('#experience-content', { height: `${eP - 4}%` }, '<')
 
-        // Setup interest
+        // Setup interests
         .set('#interests-content', { height: `${eP - 4}%` }, '<')
         .set('#interests-ground', { x: 0, y: "-100%" }, '<')
         //
@@ -131,6 +131,9 @@ export default function Home() {
         //
         .set('#sprite-person', { y: "-5px" }, '<')
 
+        // Setup contacts
+        .set('#contacts-content', { height: `${eP - 4}%` }, '<')
+
         // Experience Area
         .add('experienceStartLabel', '>0.5')
         .to('#title-area', { height: `${100 - eP}%`, duration: 1 }, 'experienceStartLabel')
@@ -142,7 +145,7 @@ export default function Home() {
         .to('#experience-scroll', { x: () => -experienceScroll(), duration: experienceDuration }, 'experienceExpandedLabel+=0.5')
 
         // Interests Area
-        .add('interestsStartLabel', '>')
+        .add('interestsStartLabel', '>0.5')
         .to('#title-text', { scrambleText: "Interests", duration: 1 }, 'interestsStartLabel')
         .to('#title-background', { y: "-30%", duration: 1 }, 'interestsStartLabel')
         .to('#interests-area', { y: `-=${eP - 6}%`, duration: 1 }, 'interestsStartLabel')
@@ -373,6 +376,27 @@ export default function Home() {
                 <div id="contacts-area" className="size-full shrink-0 
                                                   rounded-lg border-t
                                                   bg-popover shadow-2xl">
+
+                  <div id="contacts-content" className="m-0.25 p-4.75 pb-9.75 overflow-hidden">
+
+                    <div id="contacts-scroll" className="w-full h-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-2">
+                      
+                      <div className="border p-5 bg-accent rounded-md overflow-hidden">
+                        <div className="font-sans-heavy 
+                                        text-lg sm:text-xl md:text-2xl">LinkedIn</div>
+                        <div className="mb-1">Go To</div>
+                      </div>
+
+                      <div className="border p-5 bg-accent rounded-md overflow-hidden">
+                        <div className="font-sans-heavy 
+                                        text-lg sm:text-xl md:text-2xl">Email</div>
+                        <div className="mb-1">Go To</div>
+                      </div>
+
+                    </div>
+
+
+                  </div>
 
                 </div>
               </div>
