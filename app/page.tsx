@@ -63,11 +63,24 @@ export default function Home() {
         },
       });
 
-      const scrollAmount = (elementId: string) => {
+      const scrollFixedAmount = (elementId: string) => {
         const expScrollEl = document.getElementById(elementId);
         const expScrollAmount = expScrollEl ? expScrollEl.scrollWidth - expScrollEl.clientWidth : 0;
         return expScrollAmount;
       };
+
+      const experienceScroll = () => scrollFixedAmount('experience-scroll');
+
+
+      const scrollReferenceAmount = (widthElementId: string, viewElementId: string) => {
+        const widthEl = document.getElementById(widthElementId);
+        const viewEl = document.getElementById(viewElementId);
+        const expScrollAmount = widthEl && viewEl ? widthEl.scrollWidth - viewEl.clientWidth : 0;
+        return expScrollAmount;
+      };
+
+      const interestsScroll = () => scrollReferenceAmount('sprite-ground', 'interests-scroll');
+
 
       tl
         .set('#title-text', { text: "Hello There." }, 0)
@@ -87,22 +100,22 @@ export default function Home() {
         .set('#sprite-cube', { y: "+=300px" }, '<')
         //
         .set('#interests-graphic', { y: "-300%" }, '<')
-        .set('#interests-graphic', { x: () => scrollAmount('interests-scroll')/2 }, '<')
+        .set('#interests-graphic', { x: () => interestsScroll()*0.5 }, '<')
         .set('#sprite-graphic', { y: "-20px" }, '<')
         .set('#sprite-graphic', { y: "+=300px" }, '<')
         //
         .set('#interests-mountain', { y: "-400%" }, '<')
-        .set('#interests-mountain', { x: () => scrollAmount('interests-scroll') }, '<')
+        .set('#interests-mountain', { x: () => interestsScroll() }, '<')
         .set('#sprite-mountain', { y: "-5px" }, '<')
         .set('#sprite-mountain', { y: "+=300px" }, '<')
         //
         .set('#interests-cube-text', { y: "-500%" }, '<')
         //
         .set('#interests-graphic-text', { y: "-600%" }, '<')
-        .set('#interests-graphic-text', { x: () => scrollAmount('interests-scroll')/2 }, '<')
+        .set('#interests-graphic-text', { x: () => interestsScroll()*0.5 }, '<')
         //
         .set('#interests-mountain-text', { y: "-700%" }, '<')
-        .set('#interests-mountain-text', { x: () => scrollAmount('interests-scroll') }, '<')
+        .set('#interests-mountain-text', { x: () => interestsScroll() }, '<')
         //
         .set('#sprite-person', { y: "-5px" }, '<')
 
@@ -112,7 +125,7 @@ export default function Home() {
         .to('#title-text', { scrambleText: "Experience", duration: 1 }, '<')
         .to('#experience-area', { y: `-=${eP - 6}%`, duration: 1 }, '<')
         //
-        .to('#experience-scroll', { x: () => -scrollAmount('experience-scroll'), duration: experienceDuration }, '>+0.5')
+        .to('#experience-scroll', { x: () => -experienceScroll(), duration: experienceDuration }, '>+0.5')
 
         // Interests Area
         .add('interestsStartLabel', '>')
@@ -125,8 +138,8 @@ export default function Home() {
         .to('#sprite-graphic', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration-5)/3-0.5}`)
         .to('#sprite-mountain', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration-5)/3*2-0.5}`)
         //
-        .to('#sprite-person', { x: ()=>scrollAmount('interests-scroll'), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
-        .to('#interests-scroll', { x: () => -scrollAmount('interests-scroll'), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
+        .to('#sprite-person', { x: ()=>interestsScroll(), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
+        .to('#interests-scroll', { x: () => -interestsScroll(), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
 
         // Contacts Area
         .to('#title-text', { scrambleText: "Contacts", duration: 1 }, '>')
