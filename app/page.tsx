@@ -191,7 +191,7 @@ export default function Home() {
                                                   text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl
                                                   text-center text-nowrap
                                                   flex items-center justify-center">
-                      <div id="title-text" className="scramble font-mono-heavy text-[#f7c5d7] dark:text-[#c2b4b9]"></div>
+                      <div id="title-text" className="scramble font-mono-heavy text-[#e9a6be] dark:text-[#bd6584]"></div>
                     </div>
                   </div>
                 </div>
@@ -300,24 +300,21 @@ export default function Home() {
 
                       <div id="interests-cube-text" className="size-full">
                         <div className="size-full flex items-start justify-end
-                                        text-end
-                                        text-5xl font-sans-heavy">
+                                        text-end text-5xl font-sans-heavy">
                           3D Modeling
                         </div>
                       </div>
 
                       <div id="interests-graphic-text" className="h-full">
                         <div className="size-full flex items-start  justify-end
-                                        text-end
-                                        text-5xl font-sans-heavy">
+                                        text-end text-5xl font-sans-heavy">
                           Graphic Design
                         </div>
                       </div>
 
                       <div id="interests-mountain-text" className="h-full">
                         <div className="size-full flex items-start  justify-end
-                                        text-end
-                                        text-5xl font-sans-heavy">
+                                        text-end text-5xl font-sans-heavy">
                           Hiking
                         </div>
                       </div>
