@@ -114,12 +114,15 @@ export default function Home() {
         .set('#sprite-mountain', { y: "+=300px" }, '<')
         //
         .set('#interests-cube-text', { y: "-500%" }, '<')
+        .set('#interests-cube-text', { y: "-=230px" }, '<')
         //
         .set('#interests-graphic-text', { y: "-600%" }, '<')
         .set('#interests-graphic-text', { x: () => interestsScroll() * 0.5 }, '<')
+        .set('#interests-graphic-text', { y: "-=230px" }, '<')
         //
         .set('#interests-mountain-text', { y: "-700%" }, '<')
         .set('#interests-mountain-text', { x: () => interestsScroll() }, '<')
+        .set('#interests-mountain-text', { y: "-=230px" }, '<')
         //
         .set('#sprite-person', { y: "-5px" }, '<')
 
@@ -339,22 +342,22 @@ export default function Home() {
                       </div>
 
                       <div id="interests-cube-text" className="size-full">
-                        <div className="size-full flex items-start justify-end
-                                        text-end text-5xl font-sans-heavy">
+                        <div className="size-full flex items-end justify-end
+                                        text-end text-3xl sm:text-5xl font-sans-heavy">
                           3D Modeling
                         </div>
                       </div>
 
                       <div id="interests-graphic-text" className="h-full">
-                        <div className="size-full flex items-start  justify-end
-                                        text-end text-5xl font-sans-heavy">
+                        <div className="size-full flex items-end  justify-end
+                                        text-end text-3xl sm:text-5xl font-sans-heavy">
                           Graphic Design
                         </div>
                       </div>
 
                       <div id="interests-mountain-text" className="h-full">
-                        <div className="size-full flex items-start  justify-end
-                                        text-end text-5xl font-sans-heavy">
+                        <div className="size-full flex items-end  justify-end
+                                        text-end text-3xl sm:text-5xl font-sans-heavy">
                           Hiking
                         </div>
                       </div>
