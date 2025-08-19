@@ -83,7 +83,12 @@ export default function Home() {
         return expScrollAmount;
       };
 
-      const interestsScroll = () => scrollReferenceAmount('sprite-ground', 'interests-scroll');
+      const interestsScroll = () => {
+        const viewEl = document.getElementById('interests-scroll');
+        const idealAmount = scrollReferenceAmount('sprite-ground', 'interests-scroll');
+        const maxAmount = viewEl ? viewEl.clientWidth * 3 : 0;
+        return Math.min(idealAmount, maxAmount);
+      }
 
 
       tl
@@ -127,7 +132,7 @@ export default function Home() {
         .set('#sprite-person', { y: "-5px" }, '<')
 
         // Experience Area
-        .add('experienceStartLabel', '>2')
+        .add('experienceStartLabel', '>0.5')
         .to('#title-area', { height: `${100 - eP}%`, duration: 1 }, 'experienceStartLabel')
         .to('#title-background', { y: "-20%", duration: 1 }, 'experienceStartLabel')
         .to('#title-text', { scrambleText: "Experience", duration: 1 }, 'experienceStartLabel')
@@ -137,14 +142,14 @@ export default function Home() {
         .to('#experience-scroll', { x: () => -experienceScroll(), duration: experienceDuration }, 'experienceExpandedLabel+=0.5')
 
         // Interests Area
-        .add('interestsStartLabel', '>2')
+        .add('interestsStartLabel', '>')
         .to('#title-text', { scrambleText: "Interests", duration: 1 }, 'interestsStartLabel')
         .to('#title-background', { y: "-30%", duration: 1 }, 'interestsStartLabel')
         .to('#interests-area', { y: `-=${eP - 6}%`, duration: 1 }, 'interestsStartLabel')
         .add(getAnimationPersonLoopingTimeline().timeScale(4).tweenFromTo(0, interestsDuration * 4), 'interestsStartLabel')
         .add('interestsExpandedLabel', 'interestsStartLabel+=1')
         //
-        .add('interestsScrollLabel', 'interestsStartLabel+=5')
+        .add('interestsScrollLabel', 'interestsStartLabel+=1.5')
         .to('#sprite-cube', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel-=0.5`)
         .to('#sprite-graphic', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration - 5) / 3 - 0.5}`)
         .to('#sprite-mountain', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration - 5) / 3 * 2 - 0.5}`)
@@ -153,7 +158,7 @@ export default function Home() {
         .to('#interests-scroll', { x: () => -interestsScroll(), duration: `${interestsDuration - 5}` }, 'interestsScrollLabel')
 
         // Contacts Area
-        .add('contactsStartLabel', '>2')
+        .add('contactsStartLabel', '>0.5')
         .to('#title-text', { scrambleText: "Contacts", duration: 1 }, 'contactsStartLabel')
         .to('#title-background', { y: "-40%", duration: 1 }, 'contactsStartLabel')
         .to('#contacts-area', { y: `-=${eP - 6}%`, duration: 1 }, 'contactsStartLabel')
