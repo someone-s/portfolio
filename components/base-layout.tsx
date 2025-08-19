@@ -1,6 +1,5 @@
 "use client"
 
-import ListItem from "@/components/ui/list-item";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -12,6 +11,26 @@ import {
 import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
 
+function ListItem({
+  title,
+  children,
+  href,
+  ...props
+}: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
+  return (
+    <li {...props}>
+      <NavigationMenuLink asChild>
+        <Link href={href}>
+          <div className="text-sm leading-none font-medium">{title}</div>
+          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+            {children}
+          </p>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  )
+}
+
 function HomePopup() {
 	return (
 		<ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -19,8 +38,7 @@ function HomePopup() {
 				<NavigationMenuLink asChild>
 					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
 													bg-[url(/portfolio/images/scotland.jpg)] bg-cover bg-center bg-gray-300 bg-blend-multiply"
-						href="/"
-					>
+						href="/">
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
 							About Myself
 						</div>

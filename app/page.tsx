@@ -2,12 +2,14 @@
 
 
 import BaseLayout from "@/components/base-layout";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger, ScrambleTextPlugin, TextPlugin } from "gsap/all";
+import { ScrollTrigger, ScrambleTextPlugin, TextPlugin, ScrollToPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import { AnimationCubeSVG, AnimationGraphicSVG, AnimationGroundSVG, AnimationMountainSVG, AnimationPersonSVG, getAnimationPersonLoopingTimeline } from "@/components/animated-walking";
-
+import { AnimationCubeSVG, AnimationGraphicSVG, AnimationGroundSVG, AnimationMountainSVG, AnimationPersonSVG, getAnimationPersonLoopingTimeline } from "@/components/animated-svg";
+import { getScrollPosition, waitScrollPositionReady } from "@/components/helpers/gsap-get-scroll-position";
+import { useHash } from "@/components/helpers/next-use-hash";
+import { clearTimeout, setTimeout } from "timers";
 
 function ExperiencePointList({
   title,
@@ -37,10 +39,12 @@ export default function Home() {
   gsap.registerPlugin(TextPlugin);
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(ScrambleTextPlugin);
+  gsap.registerPlugin(ScrollToPlugin);
 
   const scope = useRef(null);
+  const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
-
+  // All animation for this page
   useGSAP(() => {
 
     const flow = (
@@ -100,7 +104,7 @@ export default function Home() {
         .set('#sprite-cube', { y: "+=300px" }, '<')
         //
         .set('#interests-graphic', { y: "-300%" }, '<')
-        .set('#interests-graphic', { x: () => interestsScroll()*0.5 }, '<')
+        .set('#interests-graphic', { x: () => interestsScroll() * 0.5 }, '<')
         .set('#sprite-graphic', { y: "-20px" }, '<')
         .set('#sprite-graphic', { y: "+=300px" }, '<')
         //
@@ -112,7 +116,7 @@ export default function Home() {
         .set('#interests-cube-text', { y: "-500%" }, '<')
         //
         .set('#interests-graphic-text', { y: "-600%" }, '<')
-        .set('#interests-graphic-text', { x: () => interestsScroll()*0.5 }, '<')
+        .set('#interests-graphic-text', { x: () => interestsScroll() * 0.5 }, '<')
         //
         .set('#interests-mountain-text', { y: "-700%" }, '<')
         .set('#interests-mountain-text', { x: () => interestsScroll() }, '<')
@@ -120,31 +124,40 @@ export default function Home() {
         .set('#sprite-person', { y: "-5px" }, '<')
 
         // Experience Area
-        .to('#title-area', { height: `${100 - eP}%`, duration: 1 }, '>1')
-        .to('#title-background', { y: "-20%", duration: 1 }, '<')
-        .to('#title-text', { scrambleText: "Experience", duration: 1 }, '<')
-        .to('#experience-area', { y: `-=${eP - 6}%`, duration: 1 }, '<')
+        .add('experienceStartLabel', '>2')
+        .to('#title-area', { height: `${100 - eP}%`, duration: 1 }, 'experienceStartLabel')
+        .to('#title-background', { y: "-20%", duration: 1 }, 'experienceStartLabel')
+        .to('#title-text', { scrambleText: "Experience", duration: 1 }, 'experienceStartLabel')
+        .to('#experience-area', { y: `-=${eP - 6}%`, duration: 1 }, 'experienceStartLabel')
+        .add('experienceExpandedLabel', 'experienceStartLabel+=1')
         //
-        .to('#experience-scroll', { x: () => -experienceScroll(), duration: experienceDuration }, '>+0.5')
+        .to('#experience-scroll', { x: () => -experienceScroll(), duration: experienceDuration }, 'experienceExpandedLabel+=0.5')
 
         // Interests Area
-        .add('interestsStartLabel', '>')
+        .add('interestsStartLabel', '>2')
         .to('#title-text', { scrambleText: "Interests", duration: 1 }, 'interestsStartLabel')
+        .to('#title-background', { y: "-30%", duration: 1 }, 'interestsStartLabel')
         .to('#interests-area', { y: `-=${eP - 6}%`, duration: 1 }, 'interestsStartLabel')
         .add(getAnimationPersonLoopingTimeline().timeScale(4).tweenFromTo(0, interestsDuration * 4), 'interestsStartLabel')
+        .add('interestsExpandedLabel', 'interestsStartLabel+=1')
         //
         .add('interestsScrollLabel', 'interestsStartLabel+=5')
         .to('#sprite-cube', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel-=0.5`)
-        .to('#sprite-graphic', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration-5)/3-0.5}`)
-        .to('#sprite-mountain', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration-5)/3*2-0.5}`)
+        .to('#sprite-graphic', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration - 5) / 3 - 0.5}`)
+        .to('#sprite-mountain', { y: "-=300px", duration: 0.5 }, `interestsScrollLabel+=${(interestsDuration - 5) / 3 * 2 - 0.5}`)
         //
-        .to('#sprite-person', { x: ()=>interestsScroll(), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
-        .to('#interests-scroll', { x: () => -interestsScroll(), duration: `${interestsDuration-5}` }, 'interestsScrollLabel')
+        .to('#sprite-person', { x: () => interestsScroll(), duration: `${interestsDuration - 5}` }, 'interestsScrollLabel')
+        .to('#interests-scroll', { x: () => -interestsScroll(), duration: `${interestsDuration - 5}` }, 'interestsScrollLabel')
 
         // Contacts Area
-        .to('#title-text', { scrambleText: "Contacts", duration: 1 }, '>')
-        .to('#contacts-area', { y: `-=${eP - 6}%`, duration: 1 }, '<')
+        .add('contactsStartLabel', '>2')
+        .to('#title-text', { scrambleText: "Contacts", duration: 1 }, 'contactsStartLabel')
+        .to('#title-background', { y: "-40%", duration: 1 }, 'contactsStartLabel')
+        .to('#contacts-area', { y: `-=${eP - 6}%`, duration: 1 }, 'contactsStartLabel')
+        .add('contactsExpandedLabel', 'contactsStartLabel+=1')
         ;
+
+      setTimeline(tl);
     }
 
     const mm = gsap.matchMedia();
@@ -171,8 +184,32 @@ export default function Home() {
       flow(90, '+=500%', 5, 8);
     });
 
-
   }, { scope: scope });
+
+  const hash = useHash();
+
+  useGSAP(async () => {
+
+    if (!timeline) return;
+    await waitScrollPositionReady(timeline);
+
+    const getScrollPositionWithTimeline = (label: string) => getScrollPosition(timeline, timeline.labels[label] / timeline.totalDuration());
+
+    switch (hash) {
+      case "#experience":
+        gsap.to(window, { scrollTo: getScrollPositionWithTimeline('experienceExpandedLabel'), duration: 0 });
+        break;
+      case "#interests":
+        gsap.to(window, { scrollTo: getScrollPositionWithTimeline('interestsExpandedLabel'), duration: 0 });
+        break;
+      case "#contacts":
+        gsap.to(window, { scrollTo: getScrollPositionWithTimeline('contactsExpandedLabel'), duration: 0 });
+        break;
+    }
+
+
+
+  }, [timeline, hash])
 
   return (
     <BaseLayout>
