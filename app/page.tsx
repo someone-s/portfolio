@@ -2,7 +2,7 @@
 
 
 import BaseLayout from "@/components/base-layout";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, ScrambleTextPlugin, TextPlugin, ScrollToPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
@@ -193,9 +193,12 @@ export default function Home() {
     if (!timeline) return;
     await waitScrollPositionReady(timeline);
 
+    const actualHash = window.location.hash;
+    console.log('user:' + actualHash)
+
     const getScrollPositionWithTimeline = (label: string) => getScrollPosition(timeline, timeline.labels[label] / timeline.totalDuration());
 
-    switch (hash) {
+    switch (actualHash) {
       case "#experience":
         gsap.to(window, { scrollTo: getScrollPositionWithTimeline('experienceExpandedLabel'), duration: 0 });
         break;
