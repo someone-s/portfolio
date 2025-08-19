@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, ScrambleTextPlugin, TextPlugin, ScrollToPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import { AnimationCubeSVG, AnimationGraphicSVG, AnimationGroundSVG, AnimationMountainSVG, AnimationPersonSVG, getAnimationPersonLoopingTimeline } from "@/components/animated-svg";
+import { AnimationCubeSVG, AnimationGraphicSVG, AnimationGroundSVG, AnimationLinkedInSVG, AnimationMountainSVG, AnimationPersonSVG, getAnimationLinkedInLoopingTimeline, getAnimationPersonLoopingTimeline } from "@/components/animated-svg";
 import { getScrollPosition, waitScrollPositionReady } from "@/components/helpers/gsap-get-scroll-position";
 import { useHash } from "@/components/helpers/next-use-hash";
 import { clearTimeout, setTimeout } from "timers";
@@ -42,6 +42,7 @@ export default function Home() {
   gsap.registerPlugin(ScrollToPlugin);
 
   const scope = useRef(null);
+  const animationLinkedInRef = useRef<HTMLDivElement>(null);
   const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
   // All animation for this page
@@ -63,8 +64,10 @@ export default function Home() {
           scrub: true,
           pin: true,
           invalidateOnRefresh: true,
-          markers: true,
         },
+        defaults: {
+          duration
+        }
       });
 
       const scrollFixedAmount = (elementId: string) => {
@@ -176,24 +179,32 @@ export default function Home() {
     //md
     mm.add("(min-width: 768px)", () => {
       flow(45, '+=1000%', 10, 16);
+      gsap.set('#sprite-linkedin', { width: 200 });
     });
 
     //sm
     mm.add("(min-width: 640px) and (max-width: 767px)", () => {
       flow(55, '+=500%', 5, 8);
+      gsap.set('#sprite-linkedin', { width: 200 });
     });
 
 
     mm.add("(min-width: 480px) and (max-width: 639px)", () => {
       flow(70, '+=500%', 5, 8);
+      gsap.set('#sprite-linkedin', { width: 100 });
     });
 
     mm.add("(max-width: 479px) and (min-height: 768px)", () => {
       flow(80, '+=500%', 5, 8);
+      gsap.set('#sprite-linkedin', { width: 100 });
     });
     mm.add("(max-width: 479px) and (max-height: 767px)", () => {
       flow(90, '+=500%', 5, 8);
+      gsap.set('#sprite-linkedin', { width: 100 });
     });
+
+    const linkedInTl = getAnimationLinkedInLoopingTimeline(animationLinkedInRef.current);
+    linkedInTl.play();
 
   }, { scope: scope });
 
@@ -230,7 +241,7 @@ export default function Home() {
       <div ref={scope}>
         <div id="view-area" className="w-full h-screen">
           <div className="h-full flex flex-col items-center justify-center">
-            <div className="w-[80%] h-[80%]">
+            <div className="w-[80%] max-w-[1536px] h-[80%]">
               <div className="shadow rounded-xl size-full
                               flex flex-col
                               overflow-hidden">
@@ -380,17 +391,23 @@ export default function Home() {
                   <div id="contacts-content" className="m-0.25 p-4.75 pb-9.75 overflow-hidden">
 
                     <div id="contacts-scroll" className="w-full h-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-2">
-                      
-                      <div className="border p-5 bg-accent rounded-md overflow-hidden">
-                        <div className="font-sans-heavy 
+
+                      <div className="border p-5 bg-accent rounded-md overflow-hidden flex flex-col md:flex-row h-full">
+                        <div>
+                          <div className="font-sans-heavy 
                                         text-lg sm:text-xl md:text-2xl">LinkedIn</div>
-                        <div className="mb-1">Go To</div>
+                          <div className="mb-1">Main point of contact</div>
+                        </div>
+                        <div className="grow overflow-hidden">
+                          <AnimationLinkedInSVG ref={animationLinkedInRef} width={400}></AnimationLinkedInSVG>
+                        </div>
+
                       </div>
 
                       <div className="border p-5 bg-accent rounded-md overflow-hidden">
                         <div className="font-sans-heavy 
                                         text-lg sm:text-xl md:text-2xl">Email</div>
-                        <div className="mb-1">Go To</div>
+                        <div className="mb-1">Secondary contact</div>
                       </div>
 
                     </div>
