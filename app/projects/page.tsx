@@ -157,14 +157,14 @@ export default function Home() {
 
 
     mm.add("(min-width: 480px) and (max-width: 639px)", () => {
-      flow(70, '+=500%', 5, 5, 5);
+      flow(55, '+=500%', 5, 5, 5);
     });
 
     mm.add("(max-width: 479px) and (min-height: 768px)", () => {
-      flow(70, '+=500%', 5, 5, 5);
+      flow(55, '+=500%', 5, 5, 5);
     });
     mm.add("(max-width: 479px) and (max-height: 767px)", () => {
-      flow(70, '+=500%', 5, 5, 5);
+      flow(55, '+=500%', 5, 5, 5);
     });
 
   }, { scope: scope });
