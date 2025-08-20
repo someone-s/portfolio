@@ -392,7 +392,7 @@ export default function Home() {
 
                   <div id="contacts-content" className="m-0.25 p-4.75 pb-9.75 overflow-hidden">
 
-                    <div id="contacts-scroll" className="w-full h-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-2">
+                    <div id="contacts-scroll" className="w-full h-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-5">
 
                       <div className="p-5 size-full border  bg-accent rounded-md overflow-hidden ">
                         <div className="flex flex-col md:flex-row h-full">
