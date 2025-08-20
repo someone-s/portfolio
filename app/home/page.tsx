@@ -245,7 +245,7 @@ export default function Home() {
                                                   text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl
                                                   text-center text-nowrap
                                                   flex items-center justify-center">
-                      <div id="title-text" className="scramble font-mono-heavy text-[#e9a6be] dark:text-[#d89bb0]"></div>
+                      <div id="title-text" className="scramble font-mono-heavy text-[#e9a6be] dark:text-[#d89bb0] text-shadow-lg"></div>
                     </div>
                   </div>
                 </div>
