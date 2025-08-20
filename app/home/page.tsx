@@ -2,14 +2,14 @@
 
 
 import BaseLayout from "@/components/base-layout";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, ScrambleTextPlugin, TextPlugin, ScrollToPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import { AnimationCubeSVG, AnimationGraphicSVG, AnimationGroundSVG, AnimationLinkedInSVG, AnimationMountainSVG, AnimationPersonSVG, getAnimationLinkedInLoopingTimeline, getAnimationPersonLoopingTimeline } from "@/components/animated-svg";
+import { AnimationCubeSVG, AnimationEmailSVG, AnimationGraphicSVG, AnimationGroundSVG, AnimationLinkedInSVG, AnimationMountainSVG, AnimationPersonSVG, getAnimationEmailLoopingTimeline, getAnimationLinkedInLoopingTimeline, getAnimationPersonLoopingTimeline } from "@/components/animated-svg";
 import { getScrollPosition, waitScrollPositionReady } from "@/components/helpers/gsap-get-scroll-position";
 import { useHash } from "@/components/helpers/next-use-hash";
-import { clearTimeout, setTimeout } from "timers";
+import Link from "next/link";
 
 function ExperiencePointList({
   title,
@@ -43,6 +43,7 @@ export default function Home() {
 
   const scope = useRef(null);
   const animationLinkedInRef = useRef<HTMLDivElement>(null);
+  const animationEmailRef = useRef<HTMLDivElement>(null);
   const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
   // All animation for this page
@@ -179,32 +180,33 @@ export default function Home() {
     //md
     mm.add("(min-width: 768px)", () => {
       flow(45, '+=1000%', 10, 16);
-      gsap.set('#sprite-linkedin', { width: 200 });
+
+      //gsap.set('#sprite-linkedin', { height: '100%' });
     });
 
     //sm
     mm.add("(min-width: 640px) and (max-width: 767px)", () => {
       flow(55, '+=500%', 5, 8);
-      gsap.set('#sprite-linkedin', { width: 200 });
+      // gsap.set('#sprite-linkedin', { height: '100%'  });
     });
 
 
     mm.add("(min-width: 480px) and (max-width: 639px)", () => {
       flow(70, '+=500%', 5, 8);
-      gsap.set('#sprite-linkedin', { width: 100 });
+      //  gsap.set('#sprite-linkedin', { height: 100  });
     });
 
     mm.add("(max-width: 479px) and (min-height: 768px)", () => {
       flow(80, '+=500%', 5, 8);
-      gsap.set('#sprite-linkedin', { width: 100 });
+      // gsap.set('#sprite-linkedin', { height: 100  });
     });
     mm.add("(max-width: 479px) and (max-height: 767px)", () => {
       flow(90, '+=500%', 5, 8);
-      gsap.set('#sprite-linkedin', { width: 100 });
+      //gsap.set('#sprite-linkedin', { height: 100  });
     });
 
-    const linkedInTl = getAnimationLinkedInLoopingTimeline(animationLinkedInRef.current);
-    linkedInTl.play();
+    getAnimationLinkedInLoopingTimeline(animationLinkedInRef.current).play();
+    getAnimationEmailLoopingTimeline(animationEmailRef.current).play();
 
   }, { scope: scope });
 
@@ -392,22 +394,34 @@ export default function Home() {
 
                     <div id="contacts-scroll" className="w-full h-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-2">
 
-                      <div className="border p-5 bg-accent rounded-md overflow-hidden flex flex-col md:flex-row h-full">
-                        <div>
-                          <div className="font-sans-heavy 
-                                        text-lg sm:text-xl md:text-2xl">LinkedIn</div>
-                          <div className="mb-1">Main point of contact</div>
+                      <div className="p-5 size-full border  bg-accent rounded-md overflow-hidden ">
+                        <div className="flex flex-col md:flex-row h-full">
+                          <div>
+                            <div className="font-sans-heavy 
+                                          text-lg sm:text-xl md:text-2xl">LinkedIn</div>
+                            <div className="mb-1">Main point of contact</div>
+                          </div>
+                          <div className="grow overflow-hidden flex items-end justify-end">
+                            <Link href="https://www.linkedin.com/in/eden-wong-memorable-url/" className="h-full">
+                              <AnimationLinkedInSVG ref={animationLinkedInRef} width={"100%"} height={"100%"}></AnimationLinkedInSVG>
+                            </Link>
+                          </div>
                         </div>
-                        <div className="grow overflow-hidden">
-                          <AnimationLinkedInSVG ref={animationLinkedInRef} width={400}></AnimationLinkedInSVG>
-                        </div>
-
                       </div>
 
-                      <div className="border p-5 bg-accent rounded-md overflow-hidden">
-                        <div className="font-sans-heavy 
-                                        text-lg sm:text-xl md:text-2xl">Email</div>
-                        <div className="mb-1">Secondary contact</div>
+                      <div className="p-5 size-full border  bg-accent rounded-md overflow-hidden ">
+                        <div className="flex flex-col md:flex-row h-full">
+                          <div>
+                            <div className="font-sans-heavy 
+                                          text-lg sm:text-xl md:text-2xl">Email</div>
+                            <div className="mb-1">Secondary contact</div>
+                          </div>
+                          <div className="grow overflow-hidden flex items-end justify-end">
+                            <Link href="mailto:workemaileden@gmail.com" className="h-full">
+                              <AnimationEmailSVG ref={animationEmailRef} width={"100%"} height={"100%"}></AnimationEmailSVG>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
 
                     </div>

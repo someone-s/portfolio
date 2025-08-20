@@ -2881,7 +2881,7 @@ export function getAnimationLinkedInLoopingTimeline(scope?: object | null) {
     //cy 5.289 185.121
 
     const delay = (circleEl.cx.baseVal.value - 5.289) / (185.121 - 5.289)
-                + (circleEl.cy.baseVal.value - 5.289) / (185.121 - 5.289);
+      + (circleEl.cy.baseVal.value - 5.289) / (185.121 - 5.289);
 
     nestedTl
       .set(circleEl, { visibility: 'hidden' }, 0)
@@ -2899,9 +2899,9 @@ export function getAnimationLinkedInLoopingTimeline(scope?: object | null) {
 
 export function AnimationLinkedInSVG({ ref, width, height }: { ref?: RefObject<HTMLDivElement> | RefObject<null>, width?: string | number, height?: string | number }) {
   return (
-    <div ref={ref}>
-      <svg id="sprite-linkedin" xmlns="http://www.w3.org/2000/svg" width={width} height={height} /* default w,h=719.622 */ viewBox="1 1 189.411 189.411">
-        <g fill="#fff" paintOrder="markers stroke fill">
+    <div ref={ref} className="h-full">
+      <svg id="sprite-linkedin" xmlns="http://www.w3.org/2000/svg" width={width} height={height} /* default w,h=719.622 */ viewBox="0.1 0.1 190.411 190.411" overflow={'hidden'}>
+        <g fill="#fff" paintOrder="markers stroke fill" className="fill-foreground">
           <circle className="sprite-linkedin-circle" cx="58.181" cy="5.289" r="5.289" />
           <circle className="sprite-linkedin-circle" cx="5.289" cy="15.868" r="5.289" />
           <circle className="sprite-linkedin-circle" cx="5.289" cy="26.446" r="5.289" />
@@ -3155,6 +3155,344 @@ export function AnimationLinkedInSVG({ ref, width, height }: { ref?: RefObject<H
           <circle className="sprite-linkedin-circle" cx="185.121" cy="153.386" r="5.289" />
           <circle className="sprite-linkedin-circle" cx="185.121" cy="163.965" r="5.289" />
           <circle className="sprite-linkedin-circle" cx="185.121" cy="174.543" r="5.289" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// callin useGSAP scope
+export function getAnimationEmailLoopingTimeline(scope?: object | null) {
+
+  const tl = gsap.timeline({ repeat: -1 })
+
+  gsap.utils.toArray('.sprite-email-circle', scope).forEach((el, i) => {
+
+    const circleEl = el as SVGCircleElement;
+
+    const nestedTl = gsap.timeline();
+
+    //cx 5.289 185.121
+    //cy 5.289 185.121
+
+    const delay = (circleEl.cx.baseVal.value - 5.289) / (185.121 - 5.289)
+      + (circleEl.cy.baseVal.value - 5.289) / (185.121 - 5.289);
+
+    nestedTl
+      .set(circleEl, { visibility: 'hidden' }, 0)
+      .set(circleEl, { visibility: 'visible' }, delay + 1)
+      .set(circleEl, { visibility: 'hidden' }, delay + 3)
+
+    tl.add(nestedTl, 0);
+  });
+
+  tl.duration(5);
+
+  return tl;
+
+}
+
+export function AnimationEmailSVG({ ref, width, height }: { ref?: RefObject<HTMLDivElement> | RefObject<null>, width?: string | number, height?: string | number }) {
+  return (
+    <div ref={ref} className="h-full">
+      <svg id="sprite-email" xmlns="http://www.w3.org/2000/svg" width={width} height={height} /* default w,h=719.622 */ viewBox="0.1 0.1 190.411 190.411" overflow={'hidden'}>
+        <g fill="#fff" paintOrder="markers stroke fill" className="fill-foreground">
+          <circle className="sprite-email-circle" cx="58.181" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="15.868" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="5.289" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="26.446" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="47.603" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="68.759" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="79.338" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="58.181" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="37.024" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="69.562" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="80.14" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="101.297" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="90.718" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.875" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="80.14" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="101.297" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="90.718" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.875" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="89.916" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="100.494" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="111.073" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="121.651" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="5.289" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="163.965" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="132.23" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="142.808" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="153.386" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="174.543" r="5.289" />
+          <circle className="sprite-email-circle" cx="174.543" cy="185.121" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="15.868" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="26.446" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="37.024" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="47.603" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="58.181" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="68.759" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="79.338" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="89.916" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="100.494" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="111.073" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="121.651" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="132.23" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="142.808" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="153.386" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="163.965" r="5.289" />
+          <circle className="sprite-email-circle" cx="185.121" cy="174.543" r="5.289" />
         </g>
       </svg>
     </div>
