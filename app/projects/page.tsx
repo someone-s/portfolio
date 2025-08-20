@@ -32,14 +32,16 @@ function SoftwarePointList({
 
 
 function FullImageItem({
-  image
-}: React.ComponentPropsWithoutRef<"div"> & {
-  image: string
+  image,
+  href
+}: {
+  image: string,
+  href: string
 }) {
   return (
-    <div className="shrink-0 min-w-full md:min-w-[50%] lg:min-w-[33.33%] xl:min-w-[25%] max-w-full 
+    <Link href={href} className="shrink-0 min-w-full md:min-w-[50%] lg:min-w-[33.33%] xl:min-w-[25%] max-w-full 
                     border rounded-md  p-5 overflow-hidden"
-          style={{background: image, backgroundPosition: 'center', backgroundSize: 'cover' }}></div>
+          style={{background: image, backgroundPosition: 'center', backgroundSize: 'cover' }}></Link>
 
   );
 }
@@ -224,19 +226,19 @@ export default function Home() {
 
                     <div id="software-scroll" className="w-full h-full flex flex-row gap-2">
 
-                      <FullImageItem image="url(/portfolio/images/northernisles.png)"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/northernisles.png)" href="https://someone-s.itch.io/northern-isles"></FullImageItem>
 
-                      <FullImageItem image="url(/portfolio/images/localconverter.png)"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/localconverter.png)" href="https://github.com/someone-s/local-converter"></FullImageItem>
 
-                      <FullImageItem image="url(/portfolio/images/venicevr.png)"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/venicevr.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/the-ruskin-project/"></FullImageItem>
 
-                      <FullImageItem image="url(/portfolio/images/imaginationcave.png)"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/imaginationcave.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/lancaster-music-festival/"></FullImageItem>
 
-                      <FullImageItem image="url(/portfolio/images/cochlear.png)"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/cochlear.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/lancaster-music-festival/"></FullImageItem>
 
-                      <FullImageItem image="url(/portfolio/images/bookofruskin.png)"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/bookofruskin.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/the-ruskin-project/"></FullImageItem>
                       
-                      <FullImageItem image="url(/portfolio/images/lifeinthewomb.png)"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/lifeinthewomb.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/lancaster-music-festival/"></FullImageItem>
 
                     </div>
                   </div>
