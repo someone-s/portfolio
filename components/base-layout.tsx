@@ -48,13 +48,13 @@ function HomePopup() {
 					</Link>
 				</NavigationMenuLink>
 			</li>
-			<ListItem href="/#experience" title="Experience">
+			<ListItem href="/home/#experience" title="Experience">
 				Experienced graduate developer
 			</ListItem>
-			<ListItem href="/#interests" title="Interests">
+			<ListItem href="/home/#interests" title="Interests">
 				Keen volunteer and traveller
 			</ListItem>
-			<ListItem href="/#contacts" title="Contact Details">
+			<ListItem href="/home/#contacts" title="Contact Details">
 				Contact me on various platforms
 			</ListItem>
 		</ul>
