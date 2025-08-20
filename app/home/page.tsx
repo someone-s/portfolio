@@ -180,29 +180,23 @@ export default function Home() {
     //md
     mm.add("(min-width: 768px)", () => {
       flow(45, '+=1000%', 10, 16);
-
-      //gsap.set('#sprite-linkedin', { height: '100%' });
     });
 
     //sm
     mm.add("(min-width: 640px) and (max-width: 767px)", () => {
       flow(55, '+=500%', 5, 8);
-      // gsap.set('#sprite-linkedin', { height: '100%'  });
     });
 
 
     mm.add("(min-width: 480px) and (max-width: 639px)", () => {
       flow(70, '+=500%', 5, 8);
-      //  gsap.set('#sprite-linkedin', { height: 100  });
     });
 
     mm.add("(max-width: 479px) and (min-height: 768px)", () => {
       flow(80, '+=500%', 5, 8);
-      // gsap.set('#sprite-linkedin', { height: 100  });
     });
     mm.add("(max-width: 479px) and (max-height: 767px)", () => {
       flow(90, '+=500%', 5, 8);
-      //gsap.set('#sprite-linkedin', { height: 100  });
     });
 
     getAnimationLinkedInLoopingTimeline(animationLinkedInRef.current).play();
@@ -218,7 +212,6 @@ export default function Home() {
     await waitScrollPositionReady(timeline);
 
     const actualHash = window.location.hash;
-    console.log('user:' + actualHash)
 
     const getScrollPositionWithTimeline = (label: string) => getScrollPosition(timeline, timeline.labels[label] / timeline.totalDuration());
 
