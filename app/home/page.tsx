@@ -66,9 +66,6 @@ export default function Home() {
           pin: true,
           invalidateOnRefresh: true,
         },
-        defaults: {
-          duration
-        }
       });
 
       const scrollFixedAmount = (elementId: string) => {
