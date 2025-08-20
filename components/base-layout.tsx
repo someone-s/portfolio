@@ -79,14 +79,14 @@ function ProjectsPopup() {
 					</Link>
 				</NavigationMenuLink>
 			</li>
-			<ListItem href="/projects#frontend" title="Frontend Development">
+			<ListItem href="/projects#software" title="Software Development">
 				Websites & Unity3D Projects
 			</ListItem>
 			<ListItem href="/projects#arts" title="Artistic Creations">
 				3D Modeling & Graphic Designs
 			</ListItem>
-			<ListItem href="/projects#embedded" title="Embedded Development">
-				FPGA & Embedded Experiments
+			<ListItem href="/projects#misc" title="Miscellaneous Projects">
+				Random projects goes here
 			</ListItem>
 		</ul>
 	)
