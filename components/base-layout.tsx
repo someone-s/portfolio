@@ -38,7 +38,7 @@ function HomePopup() {
 				<NavigationMenuLink asChild>
 					<Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md
 													bg-[url(/portfolio/images/scotland.jpg)] bg-cover bg-center bg-gray-300 bg-blend-multiply"
-						href="/">
+						href="/home">
 						<div className="mt-4 mb-2 text-lg font-medium text-white text-shadow-lg">
 							About Myself
 						</div>
