@@ -2884,9 +2884,9 @@ export function getAnimationLinkedInLoopingTimeline(scope?: object | null) {
       + (circleEl.cy.baseVal.value - 5.289) / (185.121 - 5.289);
 
     nestedTl
-      .set(circleEl, { visibility: 'hidden' }, 0)
-      .set(circleEl, { visibility: 'visible' }, delay + 1)
-      .set(circleEl, { visibility: 'hidden' }, delay + 3)
+      .set(circleEl, { opacity: 0.5 }, 0)
+      .set(circleEl, { opacity: 1 }, delay + 1)
+      .set(circleEl, { opacity: 0.5 }, delay + 3)
 
     tl.add(nestedTl, 0);
   });
@@ -3179,9 +3179,9 @@ export function getAnimationEmailLoopingTimeline(scope?: object | null) {
       + (circleEl.cy.baseVal.value - 5.289) / (185.121 - 5.289);
 
     nestedTl
-      .set(circleEl, { visibility: 'hidden' }, 0)
-      .set(circleEl, { visibility: 'visible' }, delay + 1)
-      .set(circleEl, { visibility: 'hidden' }, delay + 3)
+      .set(circleEl, { opacity: 0.5 }, 0)
+      .set(circleEl, { opacity: 1 }, delay + 1)
+      .set(circleEl, { opacity: 0.5 }, delay + 3)
 
     tl.add(nestedTl, 0);
   });

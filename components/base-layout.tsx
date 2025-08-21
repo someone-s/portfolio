@@ -158,7 +158,7 @@ export default function BaseLayout({
 								</NavigationMenuContent>
 							</NavigationMenuItem>
 
-							<NavigationMenuItem>
+							<NavigationMenuItem className="hidden">
 								<NavigationMenuTrigger className="bg-transparent">Blogs</NavigationMenuTrigger>
 								<NavigationMenuContent>
 									<BlogsPopup></BlogsPopup>

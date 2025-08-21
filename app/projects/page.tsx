@@ -4,7 +4,7 @@
 import BaseLayout from "@/components/base-layout";
 import { useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger, ScrambleTextPlugin, TextPlugin, ScrollToPlugin } from "gsap/all";
+import { ScrollTrigger, ScrambleTextPlugin, TextPlugin, ScrollToPlugin, Draggable, InertiaPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { getScrollPosition, waitScrollPositionReady } from "@/components/helpers/gsap-get-scroll-position";
 import { useHash } from "@/components/helpers/next-use-hash";
@@ -39,9 +39,9 @@ function FullImageItem({
   href: string
 }) {
   return (
-    <Link href={href} className="shrink-0 min-w-full md:min-w-[50%] lg:min-w-[33.33%] xl:min-w-[25%] max-w-full 
-                    border rounded-md  p-5 overflow-hidden"
-          style={{background: image, backgroundPosition: 'center', backgroundSize: 'cover' }}></Link>
+    <Link href={href} className="shrink-0 min-w-full md:min-w-[70%] lg:min-w-[45%] xl:min-w-[30%] max-w-full 
+                                border rounded-md  p-5 overflow-hidden"
+      style={{ background: image, backgroundPosition: 'center', backgroundSize: 'cover' }}></Link>
 
   );
 }
@@ -54,6 +54,8 @@ export default function Home() {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(ScrambleTextPlugin);
   gsap.registerPlugin(ScrollToPlugin);
+  gsap.registerPlugin(Draggable);
+  gsap.registerPlugin(InertiaPlugin);
 
   const scope = useRef(null);
   const animationLinkedInRef = useRef<HTMLDivElement>(null);
@@ -116,8 +118,6 @@ export default function Home() {
         .to('#title-text', { scrambleText: "Software", duration: 1 }, 'softwareStartLabel')
         .to('#software-area', { y: `-=${eP - 6}%`, duration: 1 }, 'softwareStartLabel')
         .add('softwareExpandedLabel', 'softwareStartLabel+=1')
-        //
-        .to('#software-scroll', { x: () => -softwareScroll(), duration: softwareDuration }, 'softwareExpandedLabel+=0.5')
 
         // Arts Area
         .add('artsStartLabel', '>0.5')
@@ -126,8 +126,6 @@ export default function Home() {
         .to('#title-text', { scrambleText: "Creations", duration: 1 }, 'artsStartLabel')
         .to('#arts-area', { y: `-=${eP - 6}%`, duration: 1 }, 'artsStartLabel')
         .add('artsExpandedLabel', 'artsStartLabel+=1')
-        //
-        .to('#arts-scroll', { x: () => -artsScroll(), duration: artsDuration }, 'artsScrollLabel')
 
         // Misc Area
         .add('miscStartLabel', '>0.5')
@@ -136,38 +134,43 @@ export default function Home() {
         .to('#title-text', { scrambleText: "Misc", duration: 1 }, 'miscStartLabel')
         .to('#misc-area', { y: `-=${eP - 6}%`, duration: 1 }, 'miscStartLabel')
         .add('miscExpandedLabel', 'miscStartLabel+=1')
-        //
-        .to('#misc-scroll', { x: () => -miscScroll(), duration: miscDuration }, 'miscExpandedLabel')
         ;
 
       setTimeline(tl);
+
+      Draggable.create('#software-scroll', { type: 'x', bounds: {minX: 0, maxX: -softwareScroll()}, inertia: true });
+      Draggable.create('#arts-scroll', { type: 'x', bounds: {minX: 0, maxX: -artsScroll()}, inertia: true });
+      Draggable.create('#misc-scroll', { type: 'x', bounds: {minX: 0, maxX: -miscScroll()}, inertia: true });
     }
 
     const mm = gsap.matchMedia();
 
     //md
     mm.add("(min-width: 768px)", () => {
-      flow(45, '+=1000%', 10, 10, 10);
+      flow(45, '+=300%', 10, 10, 10);
     });
 
     //sm
     mm.add("(min-width: 640px) and (max-width: 767px)", () => {
-      flow(55, '+=500%', 5, 5, 5);
+      flow(55, '+=300%', 5, 5, 5);
     });
 
 
     mm.add("(min-width: 480px) and (max-width: 639px)", () => {
-      flow(55, '+=500%', 5, 5, 5);
+      flow(55, '+=300%', 5, 5, 5);
     });
 
     mm.add("(max-width: 479px) and (min-height: 768px)", () => {
-      flow(55, '+=500%', 5, 5, 5);
+      flow(55, '+=300%', 5, 5, 5);
     });
     mm.add("(max-width: 479px) and (max-height: 767px)", () => {
-      flow(55, '+=500%', 5, 5, 5);
+      flow(55, '+=300%', 5, 5, 5);
     });
 
   }, { scope: scope });
+
+
+
 
   const hash = useHash();
 
@@ -207,7 +210,7 @@ export default function Home() {
                               overflow-hidden">
 
                 <div className="size-full shrink-0 flex flex-col overflow-hidden">
-                  <div id="title-background" className="size-full shrink-0 bg-[url(/portfolio/images/alps.jpg)] bg-center bg-cover"></div>
+                  <div id="title-background" className="size-full shrink-0 bg-[url(/portfolio/images/cotedazor.jpg)] bg-center bg-cover bg-gray-100 dark:bg-gray-300 bg-blend-multiply"></div>
                   <div className="size-full shrink-0 -translate-y-full">
                     <div id="title-area" className="size-full
                                                   text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl
@@ -237,7 +240,7 @@ export default function Home() {
                       <FullImageItem image="url(/portfolio/images/cochlear.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/lancaster-music-festival/"></FullImageItem>
 
                       <FullImageItem image="url(/portfolio/images/bookofruskin.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/the-ruskin-project/"></FullImageItem>
-                      
+
                       <FullImageItem image="url(/portfolio/images/lifeinthewomb.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/lancaster-music-festival/"></FullImageItem>
 
                     </div>
@@ -256,6 +259,8 @@ export default function Home() {
                       <FullImageItem image="url(/portfolio/images/gg1.png)" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3374184849"></FullImageItem>
 
                       <FullImageItem image="url(/portfolio/images/p5a.png)" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3383830139"></FullImageItem>
+
+                      <FullImageItem image="url(/portfolio/images/bowland.png)" href="https://www.instagram.com/bowlandcollege"></FullImageItem>
 
                       <FullImageItem image="url(/portfolio/images/gebboat.png)" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2592165648"></FullImageItem>
 
@@ -279,62 +284,13 @@ export default function Home() {
 
                     <div id="misc-scroll" className="w-full h-full flex flex-row gap-2">
 
-                      <SoftwarePointList
-                        title="Software Developer (XR/AR)"
-                        location="ISS Innovation Hub">
-                        <li>Worked at ISS Innovation Hub, part of Lancaster University</li>
-                        <li>Develop various VR & AI software from 0 to 1</li>
-                        <li>Contribute and drive product roadmap within an Agile team</li>
-                        <li>Upheld and maintain code quality</li>
-                        <li>Coach and mentor junior developers</li>
-                      </SoftwarePointList>
+                      <FullImageItem image="url(/portfolio/images/webxrxrit.png)" href="https://github.com/someone-s/webxr-xri-toolkit-bridge"></FullImageItem>
 
+                      <FullImageItem image="url(/portfolio/images/vivado.png)" href="https://medium.com/@workemaileden/vivado-adventure-part-1-installation-on-virtual-machine-2cb69edc4437"></FullImageItem>
 
-                      <SoftwarePointList
-                        title="Associate Lecturer"
-                        location="Lancaster University">
-                        <li>Worked within the School of Comupting and Communication</li>
-                        <li>Delivering in-person lab sessions with module lecturers</li>
-                        <li>Mentor and provide academic assistant to student</li>
-                      </SoftwarePointList>
+                      <FullImageItem image="url(/portfolio/images/terrain.png)" href="https://github.com/someone-s/runtime-compute-terrain/"></FullImageItem>
 
-                      <SoftwarePointList
-                        title="Game Programmer/Modder"
-                        location="Freelance Hire">
-                        <li>Take on commission work creating custom 3D models</li>
-                        <li>Tinker and program with Unity and C# DotNet</li>
-                        <li>Experiment with compute shader accelerated programs</li>
-                        <li>Create customized 3D assets for use in games</li>
-                      </SoftwarePointList>
-
-                      <SoftwarePointList
-                        title="Vice President"
-                        location="LU Hiking Club">
-                        <li>Worked within a team of 11, reporting to the President</li>
-                        <li>Coordinated transport and schedules, ensuring trips ran on time</li>
-                        <li>Adapted plans to changing conditions while meeting deadlines</li>
-                        <li>Ensured safety compliance, resolved member queries</li>
-                      </SoftwarePointList>
-
-                      <SoftwarePointList
-                        title="Communication Officer"
-                        location="Bowland College">
-                        <li>Deliver Lancaster University Bowland College events</li>
-                        <li>Maintained meeting records to support team organisation</li>
-                        <li>Managed ticket sales through internal systems with precision</li>
-                        <li>Communicated event information across multiple channels</li>
-                        <li>Create social media post and graphic design for posters</li>
-                      </SoftwarePointList>
-
-                      <SoftwarePointList
-                        title="Student Advisor"
-                        location="Wah Yan College Kowloon">
-                        <li>Part of the then newly created Stem Team</li>
-                        <li>Guided students on self-driven projects</li>
-                        <li>Provide constructive feedback and encouragement</li>
-                        <li>Operate and maintain 3D printers for rapid prototyping</li>
-                      </SoftwarePointList>
-
+                      <FullImageItem image="url(/portfolio/images/fat32.png)" href="https://github.com/someone-s/FATReader-Mirror"></FullImageItem>
                     </div>
 
 
