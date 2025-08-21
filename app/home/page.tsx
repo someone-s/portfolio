@@ -172,13 +172,6 @@ export default function Home() {
 
       Draggable.create('#experience-scroll', { type: 'x', bounds: {minX: 0, maxX: -experienceScroll()}, inertia: true });
 
-      ScrollTrigger.observe({
-          target: "#interests-scroll",
-          type: 'pointer, touch',
-          onDrag: ({ deltaX }) => {
-            gsap.to(window, { scrollTo: `-=${deltaX * 2}`, duration: 0});
-          }
-      })
     }
 
     const mm = gsap.matchMedia();
