@@ -231,7 +231,7 @@ export default function Home() {
 
                       <FullImageItem image="url(/portfolio/images/northernisles.png)" href="https://someone-s.itch.io/northern-isles"></FullImageItem>
 
-                      <FullImageItem image="url(/portfolio/images/localconverter.png)" href="https://github.com/someone-s/local-converter"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/localconverter.png)" href="https://someone-s.github.io/local-converter/"></FullImageItem>
 
                       <FullImageItem image="url(/portfolio/images/venicevr.png)" href="https://www.lancaster.ac.uk/iss/itpi/our-projects/the-ruskin-project/"></FullImageItem>
 
