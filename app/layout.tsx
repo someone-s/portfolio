@@ -36,6 +36,7 @@ const bitcountPropDouble = localFont({
 export const metadata: Metadata = {
   title: "My Portfolio",
   description: "Made with React, NextJS, ShadCN, Tailwind, Gsap",
+  icons: '/portfolio/icon.svg'
 };
 
 export default function RootLayout({
