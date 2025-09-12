@@ -229,7 +229,9 @@ export default function Home() {
 
                     <div id="software-scroll" className="w-full h-full flex flex-row gap-2">
 
-                      <FullImageItem image="url(/portfolio/images/sned.png)" href="https://someone-s.itch.io/sned"></FullImageItem>
+                      <FullImageItem image="url(/portfolio/images/transportwidget.png)" href="https://github.com/someone-s/transport-widget"></FullImageItem>
+
+                      <FullImageItem image="url(/portfolio/images/sned.png)" href="https://github.com/someone-s/sned"></FullImageItem>
 
                       <FullImageItem image="url(/portfolio/images/northernisles.png)" href="https://someone-s.itch.io/northern-isles"></FullImageItem>
 
