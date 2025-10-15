@@ -229,6 +229,10 @@ export default function Home() {
 
                     <div id="software-scroll" className="w-full h-full flex flex-row gap-2">
 
+                      <FullImageItem image="url(/portfolio/images/docurag-cloud.png)" href="https://github.com/someone-s/docurag-cloud"></FullImageItem>
+
+                      <FullImageItem image="url(/portfolio/images/docurag-local.png)" href="https://github.com/someone-s/docurag-local"></FullImageItem>
+
                       <FullImageItem image="url(/portfolio/images/transportwidget.png)" href="https://github.com/someone-s/transport-widget"></FullImageItem>
 
                       <FullImageItem image="url(/portfolio/images/sned.png)" href="https://github.com/someone-s/sned"></FullImageItem>
